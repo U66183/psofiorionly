@@ -1,0 +1,15 @@
+/* Enter your custom styles here */
+
+/*Table header Color*/
+.sapMTableTH {
+    background: #007c91 !important;
+    border-bottom: 1px solid #e5e5e5;
+    vertical-align: middle;
+}
+
+/*table header font color*/
+.sapMColumnHeaderContent{
+    color: white !important;
+    font-size: 0.8rem !important;
+    font-weight: bold !important;
+}

@@ -1,0 +1,321 @@
+<core:FragmentDefinition xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:form="sap.ui.layout.form"
+  xmlns:l="sap.ui.layout"
+  xmlns:f="sap.ui.layout.form"
+  xmlns:x="sap.uxap" height="100%">
+
+  <x:ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="true" useIconTabBar="false" showTitleInHeaderContent="true" upperCaseAnchorBar="false">
+    <x:headerTitle>
+      <x:ObjectPageDynamicHeaderTitle id="_IDGenObjectPageDynamicHeaderTitle1"> 
+        <x:expandedHeading> 
+
+          <VBox id="bnsjnjs">
+            <form:SimpleForm id="request-inf-form1" editable="true" singleContainerFullSize="false" columnsXL="1" columnsL="1" layout="ColumnLayout">
+
+              <form:content>
+                <!-- <core:Title id="vacation-timerange-heading1" /> --> 
+                <Label id="idlblcustno1" text="{i18n>customername}" class="sapUiSmallMarginBeginEnd" width="10em" required="false"/>
+                <Input id="customer-n-field1" width="10em" value="{oCustomerAttributesJModel>/cust_name}" maxLength="40"/>
+
+                <!-- <core:Title id="vacation-timerange-headi" /> -->
+                <!-- <Label id="idbladdress1" text="{i18n>city}" class="sapUiSmallMarginBeginEnd" width="10em"/>
+                  <Input id="streetad-field1" value="500" width="10em" /> -->
+                <Label id="idlblStrino" text="{i18n>streetnumber}" class="sapUiSmallMarginBeginEnd" width="10em" required="true"/>
+                <Input id="idStreetno" width="10em" value="{oCustomerAttributesJModel>/street_no}" maxLength="10"/>
+
+                <!-- <core:Title id="vacation-timerange-hea" /> -->
+                <Label id="idlblStreetAdd" text="{i18n>streeetadd}" class="sapUiSmallMarginBeginEnd" width="10em" required="true"/>
+                <Input id="idStreetAdd" width="10em" value="{oCustomerAttributesJModel>/street_name}" maxLength="60"/>
+
+
+              </form:content>
+
+            </form:SimpleForm >
+          </VBox>
+
+
+        </x:expandedHeading>
+
+        <!-- <x:snappedHeading>
+          <FlexBox id="_IDGenFlexBox1" fitContainer="true" alignItems="Center">
+            <Title id="_IDGenTitle2" text="Denise Smith" wrapping="true" />
+          </FlexBox>
+        </x:snappedHeading> -->
+
+      </x:ObjectPageDynamicHeaderTitle>
+    </x:headerTitle>
+
+
+    <x:sections>
+      <x:ObjectPageSection id="_IDGenObjectPageSection1" titleUppercase="false" title="Emergency Contact" visible="true">
+        <x:subSections>
+          <x:ObjectPageSubSection id="_IDGenObjectPageSubSection1" titleUppercase="false">
+            <x:blocks>
+              <form:SimpleForm id="rquestform" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
+                <form:content>
+                  <Label id="idlblmanufacturer" text="{i18n>emerencyconname}"/>
+                  <Input id="idmanufacturer" value="{oCustomerAttributesJModel>/emer_cont_name}" maxLength="40">
+                    <layoutData>
+                      <l:GridData id="_IDGenGridData1" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Input>
+                  <Label id="idlblmodel" text="{i18n>emergencytitle}" />
+                  <Input id="idmodel" value="{oCustomerAttributesJModel>/emer_title}" maxLength="4">
+                    <layoutData> 
+                      <l:GridData id="_IDGenGridData2" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Input>
+                  <Label id="idlblcontinuouscurrent" text="{i18n>emerencyphone}" />
+                  <Input id="idcontinuouscurrent" value="{oCustomerAttributesJModel>/emer_phone}" maxLength="30" type="Number">
+                    <layoutData>
+                      <l:GridData id="_IDGenGridData3" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Input>
+ 
+
+                </form:content>
+              </form:SimpleForm >
+            </x:blocks>
+          </x:ObjectPageSubSection>
+        </x:subSections>
+      </x:ObjectPageSection>
+
+      <x:ObjectPageSection id="_IDGenObjectPageSection2" titleUppercase="false" title="Heading 2">
+        <x:subSections>
+          <x:ObjectPageSubSection id="_IDGenObjectPageSubSection2" titleUppercase="false">
+            <x:blocks>
+              <form:SimpleForm id="rquestform2" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
+                <form:content>
+
+                  <Label id="idsubstation" text="{i18n>substation}" />
+                  <Input id="substation" showValueHelp="true" showSuggestion="true" valueHelpRequest="onHelpSubstation" maxLength="65">
+                  <!-- <ComboBox id="substation" items="{path :'oSubstationJModel>/oSubstation', sorter: { path: 'device' }}" selectedKey="{oCustomerAttributesJModel>/sub_station}">
+                    <core:Item id="_IDGenItem1" key="{oSubstationJModel>substation}" text="{oSubstationJModel>substation}" />-->
+                    <layoutData>
+                      <l:GridData id="_IDGenGridData4" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Input> 
+                  <Label id="idlblservicecenter" text="{i18n>servicecenter}" />
+                  <ComboBox id="idservicec" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE CENTER'}] }" selectedKey="{oCustomerAttributesJModel>/srv_centre}">
+                    <core:Item id="_IDGSCItem1" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
+                    <layoutData>
+                      <l:GridData id="_IDGenGridData5" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </ComboBox>
+
+                </form:content>
+              </form:SimpleForm >
+            </x:blocks>
+          </x:ObjectPageSubSection>
+        </x:subSections>
+      </x:ObjectPageSection>
+
+      <x:ObjectPageSection id="_IDGenObjectPageSection3" titleUppercase="false" title="Heading 3">
+        <x:subSections>
+          <x:ObjectPageSubSection id="_IDGenObjectPageSubSection3" titleUppercase="false">
+            <x:blocks>
+              <form:SimpleForm id="rquestform3" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
+                <form:content>
+
+                  <Label id="idpswdocid" text="{i18n>pswdocid}" />
+                  <Input id="pswdocid" value="{oCustomerAttributesJModel>/doc_id}" maxLength="225">
+                    <layoutData>
+                      <l:GridData id="_IDGenGridData6" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Input>
+                  <Label id="sectpoint" text="{i18n>sectpoint}" />
+                  <Input id="idsectpoint" value="{oCustomerAttributesJModel>/sect_point}" maxLength="60">
+                    <layoutData>
+                      <l:GridData id="_IDGenGridData7" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Input>
+                  <Label id="idsketchno" text="{i18n>sketchno}" />
+                  <Input id="sketchno" value="{oCustomerAttributesJModel>/sketch_no}" maxLength="18">
+                    <layoutData>
+                      <l:GridData id="_IDGenGridData8" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Input>
+                  <Label id="numberoflines" text="{i18n>numberoflines}" />
+                  <ComboBox id="idNoline" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'NUMBER OF LINES'}] }" selectedKey="{oCustomerAttributesJModel>/no_of_lines}">
+                    <core:Item id="_IDNolineItem1" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
+                    <layoutData>
+                      <l:GridData id="_IDGenGridData9" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </ComboBox>
+                  <Label id="psw" text="{i18n>psw}" />
+                  <Input id="idpsw" value="{oCustomerAttributesJModel>/psw}" maxLength="225">
+                    <layoutData>
+                      <l:GridData id="_IDGenGridData10" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Input>
+
+                </form:content>
+              </form:SimpleForm >
+            </x:blocks>
+          </x:ObjectPageSubSection>
+        </x:subSections>
+      </x:ObjectPageSection>
+
+
+
+      <x:ObjectPageSection id="_IDGenObjectPageSection4" titleUppercase="false" title="Circuit Information">
+        <x:subSections>
+          <x:ObjectPageSubSection id="_IDGenObjectPageSubSection4" titleUppercase="false">
+            <x:blocks>
+              <form:SimpleForm id="rquestform4" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
+                <form:content>
+
+                  <Label id="iddcpl"/>
+                  <RadioButtonGroup id="idDCPLIND" columns="5" class="sapUiMediumMarginBottom" select="onDCPLINDSelect">
+                    <RadioButton id="DC" text="DC" selected="true"/>
+                    <RadioButton id="PL" text="PL" />
+                    <RadioButton id="IND" text="IND" />
+                  </RadioButtonGroup>
+                  <Label id="idlblTrans" text="{i18n>trans}" />
+                  <Input id="idTrans" value="{oCustomerAttributesJModel>/trans}" visible="false">
+                    <layoutData>
+                      <l:GridData id="_IDGenGridData11" span="XL5 L5 M12 S12" />
+                    </layoutData>  
+                  </Input>
+                  <Label id="circuit" text="{i18n>circuit}" />
+                  <Input id="idcircuit" showValueHelp="true" valueHelpRequest="onHelpCircuit" maxLength="225">
+                  <layoutData>
+                      <l:GridData id="_IDGenGridData12" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Input>
+                  <!-- <ComboBox id="idcircuit"  items="{path :'oCircuitJModel>/oCircuit', sorter: { path: 'device' }}" selectedKey="{oCustomerAttributesJModel>/circuit}">
+                    <core:Item id="_IDcircuitItem1" key="{oCircuitJModel>circuit}" text="{oCircuitJModel>circuit}" />
+                    <layoutData>
+                      <l:GridData id="_IDGenGridData12" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </ComboBox> -->
+                  <Label id="idcircuitdoc" text="{i18n>circuitdoc}" />
+                  <Input id="circuitdoc" value="{oCustomerAttributesJModel>/circuit_doc_id}" maxLength="225">
+                  <layoutData>
+                      <l:GridData id="_IDGenGridData13" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                    </Input>
+                  <Label id="pscableno" text="{i18n>pscableno}" />
+                  <Input id="idpscableno" value="{oCustomerAttributesJModel>/cable_no}" maxLength="60">
+                  <layoutData>
+                      <l:GridData id="_IDGenGridData14" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                    </Input>
+                  <Label id="primerysrvrep" text="{i18n>primerysrvrep}" />
+                  <ComboBox id="idpsred" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'PRIMARY SERVICE REP'}] }" selectedKey="{oCustomerAttributesJModel>/psr}">
+                    <core:Item id="iditem1" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
+                    <layoutData>
+                      <l:GridData id="_IDGenGridData15" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                    
+                  </ComboBox>
+
+                </form:content>
+              </form:SimpleForm >
+            </x:blocks>
+          </x:ObjectPageSubSection>
+        </x:subSections>
+      </x:ObjectPageSection>
+
+
+      <x:ObjectPageSection id="_IDGenObjectPageSection5" titleUppercase="false" title="Heading 5">
+        <x:subSections>
+          <x:ObjectPageSubSection id="_IDGenObjectPageSubSection5" titleUppercase="false">
+            <x:blocks>
+              <form:SimpleForm id="rquestform5" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
+                <form:content>
+
+                  <Label id="_IDGenLabel31" text="{i18n>protectiveeqp1}" />
+                  <ComboBox id="idProacteqp1" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'PROTECTIVE EQUIPMENT #1'}] }" selectedKey="0">
+                      <core:Item id="idProacteqp1Item1" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
+                    <layoutData>
+                      <l:GridData id="_IDGenGridData16" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                    </ComboBox>
+                  <Label id="_IDGenLabel32" text="{i18n>protectiveeqp2}" />
+                  <ComboBox id="idProacteqp2" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'PROTECTIVE EQUIPMENT #2'}] }" selectedKey="0" >
+                    <core:Item id="idProacteqp2Item1" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
+                    <layoutData>
+                      <l:GridData id="_IDGenGridData17" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                    
+                  </ComboBox>
+                  <Label id="_IDGenLabel33" text="{i18n>throwovertyp}" />
+                  <ComboBox id="idTowertype" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'THROWOVER TYPE'}] }" selectedKey="0" >
+                    <core:Item id="idTowertypeItem1" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
+                    <layoutData>
+                      <l:GridData id="_IDGenGridData18" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                    
+                  </ComboBox>
+
+
+                  <Label id="_IDGenLabel34" text="{i18n>servicetype}" />
+                  <ComboBox id="idServicetype" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE TYPE'}] }" selectedKey="0" >
+                    <core:Item id="idServicetypeItem1" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
+                    <layoutData>
+                      <l:GridData id="_IDGenGridData19" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                    
+                  </ComboBox>
+                  <Label id="_IDonsitegen" text="{i18n>onsitegen}" />
+                  <RadioButtonGroup id="idGeneration" columns="5" class="sapUiMediumMarginBottom">
+                    <RadioButton id="Emergency" text="Emergency" />
+                    <RadioButton id="Partial" text="Partial" />
+                    <RadioButton id="Fullgeneration" text="Full generation" />
+                    <RadioButton id="Noonsitegeneration" text="No on-site generation" />
+                  </RadioButtonGroup>
+
+                  <!-- <Label id="_IDGenLabel36" text="{i18n>glnx}" visible="false"/>
+                  <Input id="_IDGenInput36" visible="false" width="50%" />
+                  <Label id="_IDGenLabel37" text="{i18n>glny}" visible="false"/>
+                  <Input id="_IDGenInput37" visible="false" width="50%" /> -->
+                  <Label id="_IDGenLabel35" text="{i18n>totalgen}" /> 
+                  <Input id="idgeneration" value="{oCustomerAttributesJModel>/generation}" maxLength="225">
+                  <layoutData>
+                      <l:GridData id="_IDGenGridData20" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                    </Input>
+                  <Text id="idkW" text="kW" />
+                  <Label id="_IDGenLabel36" />
+                  <Button id="idOTurl" text="OT url" icon="sap-icon://chain-link" type="Success" press="onOpenOTurl">
+                  <layoutData>
+                      <l:GridData id="_IDGenGridData21" span="XL2 L2 M12 S12" />
+                    </layoutData>
+                    </Button>
+                  <!-- <ComboBox id="idgeneration" items="{oServicetype>/}" selectedKey="0" width="50%">
+                    <core:Item id="iditemeneration" key="{oServicetype>Key}" text="{oServicetype>value}" />
+                  </ComboBox> -->
+
+                </form:content>
+              </form:SimpleForm >
+            </x:blocks>
+          </x:ObjectPageSubSection>
+        </x:subSections>
+      </x:ObjectPageSection>
+
+
+      <x:ObjectPageSection id="_IDGenObjectPageSection6" titleUppercase="false" title="Comments">
+        <x:subSections>
+          <x:ObjectPageSubSection id="_IDGenObjectPageSubSection6" titleUppercase="false">
+            <x:blocks>
+              <form:SimpleForm id="rquestform9" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
+                <form:content>
+                  <Label id="lb2" text="Comments"/>
+                  <TextArea id="_IDGenInput19" growing="true" showExceededText="true" valueLiveUpdate="true" rows="6"/>
+
+                </form:content>
+              </form:SimpleForm >
+            </x:blocks>
+          </x:ObjectPageSubSection>
+        </x:subSections>
+      </x:ObjectPageSection>
+
+    </x:sections>
+
+  </x:ObjectPageLayout>
+
+
+</core:FragmentDefinition>
