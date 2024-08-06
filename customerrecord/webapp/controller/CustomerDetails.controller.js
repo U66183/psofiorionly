@@ -22,21 +22,21 @@ sap.ui.define([
                 if ( superior_flag== "X") { //create child
                     this.getView().byId("idpanel").setVisible(true);
                     this.getView().byId("idpanel2").setVisible(false);
-                    this.getView().byId("_IDGenButton1").setVisible(true);
-                    this.getView().byId("_IDGenButton2").setVisible(false);
-                    this.getView().byId("_IDGenButton3").setVisible(false);
-                    this.getView().byId("_IDGenButton4").setVisible(false);
-                    this.getView().byId("_IDGenButton5").setVisible(false);
+                    // this.getView().byId("_IDGenButton1").setVisible(true);
+                    // this.getView().byId("_IDGenButton2").setVisible(false);
+                    // this.getView().byId("_IDGenButton3").setVisible(false);
+                    // this.getView().byId("_IDGenButton4").setVisible(false);
+                    // this.getView().byId("_IDGenButton5").setVisible(false);
                     //this.LoadFragmentCreateChield();
               //  } else if (currentScope == "cd_display" && superior_flag== "") {
                 } else    if ( superior_flag== "") { // display child
                     this.getView().byId("idpanel").setVisible(false);
                     this.getView().byId("idpanel2").setVisible(true);
-                    this.getView().byId("_IDGenButton1").setVisible(false);
-                    this.getView().byId("_IDGenButton2").setVisible(true);
-                    this.getView().byId("_IDGenButton3").setVisible(false);
-                    this.getView().byId("_IDGenButton4").setVisible(false);
-                    this.getView().byId("_IDGenButton5").setVisible(false);
+                    // this.getView().byId("_IDGenButton1").setVisible(false);
+                    // this.getView().byId("_IDGenButton2").setVisible(true);
+                    // this.getView().byId("_IDGenButton3").setVisible(false);
+                    // this.getView().byId("_IDGenButton4").setVisible(false);
+                    // this.getView().byId("_IDGenButton5").setVisible(false);
                     this.getView().byId("_IDGenObjectPageSection1DiplayChild").setVisible(true);
                     this.getCustomerAttribute();
                     //this.LoadFragmentDisplayChield();
@@ -93,22 +93,41 @@ sap.ui.define([
             _handleSubstationClose: function (oEvent) {
                 var oSelectedItem = oEvent.getParameter("selectedItem");
                 if (oSelectedItem) {
-                    //this.obj = oSelectedItem.getBindingContext().getObject();
+                    this.objSubstation = oSelectedItem.getBindingContext().getObject();
                     this.getView().byId("substation").setValue(oSelectedItem.getTitle());
+                    this.getView().byId("idcircuit").setValue();
                 }
             },
 
             //************************F4 Help for Circuit***********************************/
-            onHelpCircuit: function (oEvt) {
+            onHelpCircuit: function (oEvt) { 
+                var oSubstation = this.getView().byId("substation").getValue();
+                if (oSubstation === "") {
+                    sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("text_note_mandatory"), {
+                        icon: sap.m.MessageBox.Icon.WARNING,
+                        title: this.getView().getModel("i18n").getProperty("error"),
+                        actions: [sap.m.MessageBox.Action.OK] 
+                    });
+                    this.getView().byId("idcircuit").setValue();
+                    return;
+                }
+
+                this.oDCPLIND = this.getView().byId("idDCPLIND").getSelectedButton().getText();
                 var sPath = this.getOwnerComponent().getModel().sServiceUrl + "/circuit_dropdownSet";
                 var oCircuitJModel = this.getView().getModel("oCircuitJModel");
                 oCircuitJModel.loadData(sPath, null, false, "GET", false, false, null);
-
+                // Create filters
+                var oFilterSubstation = new sap.ui.model.Filter("substation", sap.ui.model.FilterOperator.EQ, this.objSubstation.substation);
+                var oFilterDCPLIND = new sap.ui.model.Filter("dc_pl", sap.ui.model.FilterOperator.EQ, this.oDCPLIND);
+                 // Combine filters
+                var oFiltersF = [oFilterSubstation, oFilterDCPLIND];
+                
+                    
                 var _valueHelpCircuitDialog = new sap.m.SelectDialog({
 
                     title: "Circuit", contentHeight: "50%", titleAlignment: "Center",
                     items: {
-                        path: "/d/results",
+                        path: "/d/results", 
                         template: new sap.m.StandardListItem({
                             title: "{circuit}",
                             description: "",
@@ -128,6 +147,9 @@ sap.ui.define([
                     cancel: [this._handleCircuitClose, this]
                 });
                 _valueHelpCircuitDialog.setModel(oCircuitJModel);
+                //Apply Filters
+                var oCircuit = _valueHelpCircuitDialog.getBinding("items");
+                    oCircuit.filter([oFiltersF]);
                 _valueHelpCircuitDialog.open();
             },
 
@@ -277,12 +299,17 @@ sap.ui.define([
             // },
             //****************************DC/PL/IND Logic **************************************************** */
             onDCPLINDSelect: function () {
-                var s = this.oView.byId("idDCPLIND").getSelectedButton();
-                var val = s.getText();
-                if (val === "IND") {
+                var oCircuit = this.getView().byId("idcircuit");
+                    oCircuit.setValue();
+                var oSelected = this.oView.byId("idDCPLIND").getSelectedButton();
+                this.oDCPLIND = oSelected.getText();
+                if (this.oDCPLIND === "IND") {
                     this.oView.byId("idTrans").setVisible(true);
+                    oCircuit.setValue();
+                    oCircuit.setEnabled(false);
                 } else {
                     this.oView.byId("idTrans").setVisible(false);
+                    oCircuit.setEnabled(true);
                 }
             },
             //**************************Open OPEN TEXT URL **************************************************************/
@@ -311,15 +338,15 @@ sap.ui.define([
             onEditCustomerAttribute: function () {
                 this.getView().byId("idpanel").setVisible(true);
                 this.getView().byId("idpanel2").setVisible(false);
-                this.getView().byId("_IDGenButton1").setVisible(true);
-                this.getView().byId("_IDGenButton2").setVisible(false);
-                this.getView().byId("_IDGenButton3").setVisible(false);
-                this.getView().byId("_IDGenButton4").setVisible(false);
-                this.getView().byId("_IDGenButton5").setVisible(false);
+                // this.getView().byId("_IDGenButton1").setVisible(true);
+                // this.getView().byId("_IDGenButton2").setVisible(false);
+                // this.getView().byId("_IDGenButton3").setVisible(false);
+                // this.getView().byId("_IDGenButton4").setVisible(false);
+                // this.getView().byId("_IDGenButton5").setVisible(false);
             },
 
             //****************Submit Customer Attrubutes****************************************/
-            saveCustomerAttribute: function () {
+            createCustomerDetails: function () {
                 var oStreetNo = this.getView().byId("idStreetno").getValue();
                 var oStreetAdd = this.getView().byId("idStreetAdd").getValue();
                 if (oStreetNo === "" || oStreetAdd === "") {
@@ -393,11 +420,10 @@ sap.ui.define([
                     oAttributs.pso_site = "",
                     oAttributs.demo_site = ""
 
-
-
+                                       
                 this.getOwnerComponent().getModel().create("/Customer_attributeSet", oAttributs, {
                     //    this.oDataModel.read("Customer_searchSet", {
-                    success: function (oData) {
+                    success: function (oData, oResponse) {
                         //that.oBusyIndicator.close()
                         if (oData && oData.Status === "S") {
                             var dialog = new sap.m.Dialog({

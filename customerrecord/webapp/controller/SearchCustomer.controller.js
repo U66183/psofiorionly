@@ -315,25 +315,25 @@ sap.ui.define([
                 // });  
             },
 
-            onCreateChield:function(){ 
-                var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-                oRouter.navTo("CustomerDetails", {
-                    scope: "cd_create"
-                  });
-            }, 
+            // onCreateChield:function(){ 
+            //     var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            //     oRouter.navTo("CustomerDetails", {
+            //         scope: "cd_create"
+            //       });
+            // }, 
 
-            onDisplayChield:function(){
-                var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-                oRouter.navTo("CustomerDetails", {
-                    scope: "cd_display"
-                  });
-            },
-            onDisplayChildLtd:function(){
-                var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-                oRouter.navTo("CustomerDetails", {
-                    scope: "cd_display_limited"
-                  });
-            },
+            // onDisplayChield:function(){
+            //     var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            //     oRouter.navTo("CustomerDetails", {
+            //         scope: "cd_display"
+            //       });
+            // },
+            // onDisplayChildLtd:function(){
+            //     var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            //     oRouter.navTo("CustomerDetails", {
+            //         scope: "cd_display_limited"
+            //       });
+            // },
  
             //***************************************Search within table data****************************************** */
             handleTableSearch: function (oEvet) {
@@ -356,7 +356,7 @@ sap.ui.define([
                 var oFilterFinal = new Filter([oFilter, oFilter1, oFilter2, oFilter3, oFilter4, oFilter5, oFilter6, oFilter7,
                     oFilter8, oFilter9, oFilter10, oFilter11, oFilter12, oFilter13, oFilter14], false);
                 this.oView.byId("idCustomerListTable").getBinding("items").filter([oFilterFinal]);
-            },
+            },  
  
             //******************************************Add Column Filters************************************************** */    
  

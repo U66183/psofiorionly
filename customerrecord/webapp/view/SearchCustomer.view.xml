@@ -146,9 +146,9 @@
                                 <Label id="idlblNoofRec" text="{i18n>noOfRecords}"></Label>
                                 <Text id="idNoofRec" />
                                 <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
-                                <Button id="idcreateButton" text="Create Child" type="Emphasized"  width="auto" press="onCreateChield" />
+                                <!-- <Button id="idcreateButton" text="Create Child" type="Emphasized"  width="auto" press="onCreateChield" />
                                 <Button id="idDisplayButton" text="Display Child" type="Emphasized"  width="auto" press="onDisplayChield" />
-                                <Button id="idDisplayButtonltd" text="Limited Display Child" type="Emphasized"  width="auto" press="onDisplayChildLtd" />
+                                <Button id="idDisplayButtonltd" icon="sap-icon://SAP-icons-TNT" text="Limited Display Child" type="Emphasized"  width="auto" press="onDisplayChildLtd" /> -->
                                
                                 <SearchField id="idValidReportsSearch" width="30%" class="sapUiSmallMargin" liveChange="handleTableSearch" placeholder="{i18n>searchfieldText1}"/>
                                 <Button id="idValidationReportsTableFilter" text="" type="Default" icon="sap-icon://filter" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onTableColumnFilterButtonPress" tooltip="{i18n>columnFilters}"/>

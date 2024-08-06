@@ -1,0 +1,9 @@
+<mvc:View controllerName="com.pso.customerrecord.controller.CustomerAttributeSpecials"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}" titleAlignment="Center" enableScrolling="true">
+  </Page>
+</mvc:View>

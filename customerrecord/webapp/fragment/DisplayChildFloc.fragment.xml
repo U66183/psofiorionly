@@ -49,7 +49,7 @@
 
 
     <x:sections>
-      <x:ObjectPageSection id="_IDGenObjectPageSection1DiplayChild" titleUppercase="false" title="Heading 1" visible="true">
+      <x:ObjectPageSection id="_IDGenObjectPageSection1DiplayChild" titleUppercase="false" title="Emergency Contact" visible="true">
         <x:subSections>
           <x:ObjectPageSubSection id="_IDGenObjectPageSubSection1DiplayChild" titleUppercase="false">
             <x:blocks>
@@ -82,34 +82,9 @@
         </x:subSections>
       </x:ObjectPageSection>
 
-      <x:ObjectPageSection id="_IDGenObjectPageSection2DiplayChild" titleUppercase="false" title="Heading 2">
-        <x:subSections>
-          <x:ObjectPageSubSection id="_IDGenObjectPageSubSection2DiplayChild" titleUppercase="false">
-            <x:blocks>
-              <form:SimpleForm id="idrquestform2DiplayChild" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
-                <form:content>
+      
 
-                  <Label id="idlblsubstationDiplayChild" text="{i18n>substation}" />
-                  <Text id="idsubstationDiplayChild" text="{oCustomerAttributesJModel>/sub_station}">
-                    <layoutData>
-                      <l:GridData id="_IDGenGridData4DiplayChild" span="XL5 L5 M12 S12" />
-                    </layoutData>
-                  </Text>
-                  <Label id="idlblservicecenterDiplayChild" text="{i18n>servicecenter}" />
-                  <Text id="idservicecDiplayChild" text="{oCustomerAttributesJModel>/srv_center}">
-                    <layoutData>
-                      <l:GridData id="_IDGenGridData5DiplayChild" span="XL5 L5 M12 S12" />
-                    </layoutData>
-                  </Text>
-
-                </form:content>
-              </form:SimpleForm >
-            </x:blocks>
-          </x:ObjectPageSubSection>
-        </x:subSections>
-      </x:ObjectPageSection>
-
-      <x:ObjectPageSection id="_IDGenObjectPageSection3DiplayChild" titleUppercase="false" title="Heading 3">
+      <x:ObjectPageSection id="_IDGenObjectPageSection3DiplayChild" titleUppercase="false" title="Heading 2">
         <x:subSections>
           <x:ObjectPageSubSection id="_IDGenObjectPageSubSection3DiplayChild" titleUppercase="false">
             <x:blocks>
@@ -156,7 +131,7 @@
 
 
 
-      <x:ObjectPageSection id="_IDGenObjectPageSection4DiplayChild" titleUppercase="false" title="Heading 4">
+      <x:ObjectPageSection id="_IDGenObjectPageSection4DiplayChild" titleUppercase="false" title="Circuit Information">
         <x:subSections>
           <x:ObjectPageSubSection id="_IDGenObjectPageSubSection4DiplayChild" titleUppercase="false">
             <x:blocks>
@@ -177,6 +152,12 @@
                     </layoutData>
                     
                   </Text>
+                  <Label id="idlblsubstationDiplayChild" text="{i18n>substation}" />
+                  <Text id="idsubstationDiplayChild" text="{oCustomerAttributesJModel>/sub_station}">
+                    <layoutData>
+                      <l:GridData id="_IDGenGridData4DiplayChild" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
                   <Label id="idlblcircuitDiplayChild" text="{i18n>circuit}" />
                   <Text id="idcircuitDiplayChild" text="{oCustomerAttributesJModel>/circuit}">
                     <layoutData>
@@ -196,6 +177,12 @@
                       <l:GridData id="_IDGenGridData14DiplayChild" span="XL5 L5 M12 S12" />
                     </layoutData>
                     </Text>
+                    <Label id="idlblservicecenterDiplayChild" text="{i18n>servicecenter}" />
+                  <Text id="idservicecDiplayChild" text="{oCustomerAttributesJModel>/srv_center}">
+                    <layoutData>
+                      <l:GridData id="_IDGenGridData5DiplayChild" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Text>
                   <Label id="idlblprimerysrvrepDiplayChild" text="{i18n>primerysrvrep}" />
                   <Text id="idpsrepDiplayChild" text="{oCustomerAttributesJModel>/psr}">
                     <layoutData>
@@ -212,7 +199,7 @@
       </x:ObjectPageSection>
 
 
-      <x:ObjectPageSection id="_IDGenObjectPageSection5DiplayChild" titleUppercase="false" title="Heading 5">
+      <x:ObjectPageSection id="_IDGenObjectPageSection5DiplayChild" titleUppercase="false" title="Heading 4">
         <x:subSections>
           <x:ObjectPageSubSection id="_IDGenObjectPageSubSection5DiplayChild" titleUppercase="false">
             <x:blocks>

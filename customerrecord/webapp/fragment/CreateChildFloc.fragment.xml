@@ -82,37 +82,7 @@
         </x:subSections>
       </x:ObjectPageSection>
 
-      <x:ObjectPageSection id="_IDGenObjectPageSection2" titleUppercase="false" title="Heading 2">
-        <x:subSections>
-          <x:ObjectPageSubSection id="_IDGenObjectPageSubSection2" titleUppercase="false">
-            <x:blocks>
-              <form:SimpleForm id="rquestform2" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
-                <form:content>
-
-                  <Label id="idsubstation" text="{i18n>substation}" />
-                  <Input id="substation" showValueHelp="true" showSuggestion="true" valueHelpRequest="onHelpSubstation" maxLength="65">
-                  <!-- <ComboBox id="substation" items="{path :'oSubstationJModel>/oSubstation', sorter: { path: 'device' }}" selectedKey="{oCustomerAttributesJModel>/sub_station}">
-                    <core:Item id="_IDGenItem1" key="{oSubstationJModel>substation}" text="{oSubstationJModel>substation}" />-->
-                    <layoutData>
-                      <l:GridData id="_IDGenGridData4" span="XL5 L5 M12 S12" />
-                    </layoutData>
-                  </Input> 
-                  <Label id="idlblservicecenter" text="{i18n>servicecenter}" />
-                  <ComboBox id="idservicec" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE CENTER'}] }" selectedKey="{oCustomerAttributesJModel>/srv_centre}">
-                    <core:Item id="_IDGSCItem1" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
-                    <layoutData>
-                      <l:GridData id="_IDGenGridData5" span="XL5 L5 M12 S12" />
-                    </layoutData>
-                  </ComboBox>
-
-                </form:content>
-              </form:SimpleForm >
-            </x:blocks>
-          </x:ObjectPageSubSection>
-        </x:subSections>
-      </x:ObjectPageSection>
-
-      <x:ObjectPageSection id="_IDGenObjectPageSection3" titleUppercase="false" title="Heading 3">
+      <x:ObjectPageSection id="_IDGenObjectPageSection3" titleUppercase="false" title="Heading 2">
         <x:subSections>
           <x:ObjectPageSubSection id="_IDGenObjectPageSubSection3" titleUppercase="false">
             <x:blocks>
@@ -179,6 +149,14 @@
                       <l:GridData id="_IDGenGridData11" span="XL5 L5 M12 S12" />
                     </layoutData>  
                   </Input>
+                    <Label id="idsubstation" text="{i18n>substation}" />
+                  <Input id="substation" showValueHelp="true" showSuggestion="true" valueHelpRequest="onHelpSubstation" maxLength="65">
+                  <!-- <ComboBox id="substation" items="{path :'oSubstationJModel>/oSubstation', sorter: { path: 'device' }}" selectedKey="{oCustomerAttributesJModel>/sub_station}">
+                    <core:Item id="_IDGenItem1" key="{oSubstationJModel>substation}" text="{oSubstationJModel>substation}" />-->
+                    <layoutData>
+                      <l:GridData id="_IDGenGridData4" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </Input> 
                   <Label id="circuit" text="{i18n>circuit}" />
                   <Input id="idcircuit" showValueHelp="true" valueHelpRequest="onHelpCircuit" maxLength="225">
                   <layoutData>
@@ -203,6 +181,13 @@
                       <l:GridData id="_IDGenGridData14" span="XL5 L5 M12 S12" />
                     </layoutData>
                     </Input>
+                    <Label id="idlblservicecenter" text="{i18n>servicecenter}" />
+                  <ComboBox id="idservicec" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'SERVICE CENTER'}] }" selectedKey="{oCustomerAttributesJModel>/srv_centre}">
+                    <core:Item id="_IDGSCItem1" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
+                    <layoutData>
+                      <l:GridData id="_IDGenGridData5" span="XL5 L5 M12 S12" />
+                    </layoutData>
+                  </ComboBox>
                   <Label id="primerysrvrep" text="{i18n>primerysrvrep}" />
                   <ComboBox id="idpsred" items="{path :'dropDownJsonModel>/DropdownData', sorter: { path: 'device' }, filters: [{path: 'desc', operator: 'EQ', value1: 'PRIMARY SERVICE REP'}] }" selectedKey="{oCustomerAttributesJModel>/psr}">
                     <core:Item id="iditem1" key="{dropDownJsonModel>value}" text="{dropDownJsonModel>value}" />
@@ -220,7 +205,7 @@
       </x:ObjectPageSection>
 
 
-      <x:ObjectPageSection id="_IDGenObjectPageSection5" titleUppercase="false" title="Heading 5">
+      <x:ObjectPageSection id="_IDGenObjectPageSection5" titleUppercase="false" title="Heading 4">
         <x:subSections>
           <x:ObjectPageSubSection id="_IDGenObjectPageSubSection5" titleUppercase="false">
             <x:blocks>
