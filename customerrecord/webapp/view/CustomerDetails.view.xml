@@ -9,13 +9,7 @@
     xmlns:smartForm="sap.ui.comp.smartform"
     xmlns:smartField="sap.ui.comp.smartfield"
     xmlns="sap.m">
-    <Page
-        id="page"
-        title="{i18n>title}"
-        titleAlignment="Center"
-        enableScrolling="false"
-        
-    >
+    <Page id="page" title="{i18n>title}" titleAlignment="Center" enableScrolling="false">
         <!-- <form:SimpleForm id="form1">
             <Bar id="bar1">
                 <contentLeft> -->
@@ -76,57 +70,26 @@
         </form:SimpleForm> -->
 
         <content>
-            <Panel
-                id="idpanel"
-                expanded="true"
-                expandable="false"
-                height="600px"
-                visible='true'
-            >
+            <Panel id="idpanel" expanded="true" expandable="false" height="600px" visible='true'>
             <headerToolbar>
-                    <OverflowToolbar style="Clear">
+                <OverflowToolbar id="_IDGenOverflowToolbar1" style="Clear">
                         <!-- <Title text="Custom Toolbar with a header text" /> -->
-                        <Button
-                        id="btback1"                        
-                        press="onBack"
-                        type="Back"
-                    />
-                        <ToolbarSpacer />
-                        
-                       <Button
-                        id="_IDGenButton1"
-                        type="Negative"
-                        text="Create Record"
-                        icon="sap-icon://create"
-                        press="createCustomerDetails"
-                        visible="true"                        
-                    /> 
-
-
-                     
-                    </OverflowToolbar>
-                </headerToolbar>
-                <core:Fragment
-                    fragmentName="com.pso.customerrecord.fragment.CreateChildFloc"
-                    type="XML"
-                />
+                    <Button id="btback1" press="onBack" type="Back"/>
+                    <ToolbarSpacer id="_IDGenToolbarSpacer1" /> 
+                       <Button id="_IDGenButton1" type="Negative" text="Create Record" icon="sap-icon://create"
+                               press="createCustomerDetails" visible="true" /> 
+                </OverflowToolbar>
+            </headerToolbar>
+                <core:Fragment fragmentName="com.pso.customerrecord.fragment.CreateChildFloc" type="XML"/>
             </Panel>
 
-            <Panel
-                id="idpanel2"
-                expanded="true"
-                expandable="false"
-                height="600px"
-                visible="false"
-            >
+
+
+            <Panel id="idpanel2" expanded="true" expandable="false" height="600px" visible="false" >
                 <headerToolbar>
-                    <OverflowToolbar style="Clear">
+                    <OverflowToolbar id="_IDGenOverflowToolbar2" style="Clear">
                         <!-- <Title text="Custom Toolbar with a header text" /> -->
-                        <Button
-                        id="btback2"                        
-                        press="onBack"
-                        type="Back"
-                    />
+                        <Button id="btback2" press="onBack" type="Back" />
                         <ToolbarSpacer />
                         
                         <Button
