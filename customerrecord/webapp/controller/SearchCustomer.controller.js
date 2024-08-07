@@ -1,5 +1,7 @@
+//jQuery.sap.require("com.pso.customerrecord.formatter.Formatter");
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
+    "com/pso/customerrecord/js/Formatter",
     "sap/ui/model/odata/ODataModel",
     'sap/ui/model/json/JSONModel',
     'sap/ui/model/type/String',
@@ -13,7 +15,7 @@ sap.ui.define([
     'sap/ui/comp/smartvariants/PersonalizableInfo',
     "sap/ui/export/Spreadsheet"
 ],
-    function (Controller, ODataModel, JSONModel, String, ColumnListItem, Label, SearchField, Token, Filter, FilterOperator, ShellUIService, PersonalizableInfo, Spreadsheet) {
+    function (Controller,Formatter, ODataModel, JSONModel, String, ColumnListItem, Label, SearchField, Token, Filter, FilterOperator, ShellUIService, PersonalizableInfo, Spreadsheet) {
         "use strict";
  
         return Controller.extend("com.pso.customerrecord.controller.SearchCustomer", {

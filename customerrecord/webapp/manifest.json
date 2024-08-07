@@ -106,6 +106,13 @@
           "target": [
             "TargetCustomerDetails"
           ]
+        },
+        {
+          "name": "CustomerAttributeSpecials",
+          "pattern": "CustomerAttributeSpecials/{scope}",
+          "target": [
+            "TargetCustomerAttributeSpecials"
+          ]
         }
       ],
       "targets": {
@@ -122,6 +129,13 @@
           "clearControlAggregation": false,
           "viewId": "CustomerDetails",
           "viewName": "CustomerDetails"
+        },
+        "TargetCustomerAttributeSpecials": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "CustomerAttributeSpecials",
+          "viewName": "CustomerAttributeSpecials"
         }
       }
     },

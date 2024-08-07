@@ -7,6 +7,9 @@ sap.ui.define([
 
         return Controller.extend("com.pso.customerrecord.controller.CustomerAttributeSpecials", {
             onInit: function () {
+            },
+            sendSpecialsForApproval: function(oEvent){
+                
             }
     });
 });

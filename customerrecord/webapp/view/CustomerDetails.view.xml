@@ -46,7 +46,7 @@
                         id="_IDGenButton3"
                         type="Emphasized"
                         text="Create PSR"
-                        icon="sap-icon://create"
+                        icon="sap-icon://create" 
                         visible="false"
                     /> -->
                     <!-- record is child floc, PSR exists, user has sufficient access , then last approved record is fetched from ISU-->
@@ -71,15 +71,22 @@
 
         <content>
             <Panel id="idpanel" expanded="true" expandable="false" height="600px" visible='true'>
-            <headerToolbar>
-                <OverflowToolbar id="_IDGenOverflowToolbar1" style="Clear">
-                        <!-- <Title text="Custom Toolbar with a header text" /> -->
-                    <Button id="btback1" press="onBack" type="Back"/>
+                <headerToolbar>
+                    <OverflowToolbar id="_IDGenOverflowToolbar1" style="Clear">
+                    <!-- <Title text="Custom Toolbar with a header text" /> -->
+                    <Button id="btback1" 
+                            press="onBack" 
+                            type="Back"/>
+
                     <ToolbarSpacer id="_IDGenToolbarSpacer1" /> 
-                       <Button id="_IDGenButton1" type="Negative" text="Create Record" icon="sap-icon://create"
-                               press="createCustomerDetails" visible="true" /> 
-                </OverflowToolbar>
-            </headerToolbar>
+
+                    <Button id="_IDButtonCreateRecord" 
+                            type="Negative" 
+                            text="Create Record" 
+                            icon="sap-icon://create"
+                            press="createCustomerDetails" visible="true" /> 
+                 </OverflowToolbar>
+                </headerToolbar>
                 <core:Fragment fragmentName="com.pso.customerrecord.fragment.CreateChildFloc" type="XML"/>
             </Panel>
 
@@ -90,21 +97,21 @@
                     <OverflowToolbar id="_IDGenOverflowToolbar2" style="Clear">
                         <!-- <Title text="Custom Toolbar with a header text" /> -->
                         <Button id="btback2" press="onBack" type="Back" />
-                        <ToolbarSpacer />
-                        
+                        <ToolbarSpacer id="_IDGenToolbarSpacer2" />
+                         
                         <Button
                             id="_IDGenButton2"
                             type="Neutral"
                             text="Edit Record"
                             icon="sap-icon://edit"
                             press="onEditCustomerAttribute"
-                            visible="true"
-                        />
+                            visible="true"/>
                         <Button
                             id="_IDGenButtonCreateSp"
                             type="Negative"
                             text="Create Specials"
                             icon="sap-icon://create"
+                            press="onCreateSpecials"
                             visible="true"
                         />
                         <Button
@@ -112,16 +119,12 @@
                             type="Accept"
                             text="Display Specials"
                             icon="sap-icon://display"
-                            visible="true"
-                        />
-
-                     
+                            visible="false"/>
                     </OverflowToolbar>
                 </headerToolbar>
                 <core:Fragment
                     fragmentName="com.pso.customerrecord.fragment.DisplayChildFloc"
-                    type="XML"
-                />
+                    type="XML" />
             </Panel>
         </content>
         <footer>

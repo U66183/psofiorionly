@@ -14,12 +14,14 @@ sap.ui.define([
                     this._loadFragmentPerScope(oEvent.getParameter("arguments").scope);
                 }, this);
 
+                this.oEdiFlag = "";
             },
             _loadFragmentPerScope: function (currentScope) {
 
                 var superior_flag = this.getOwnerComponent().getModel("oCustomerAttributesJModel").oData.superior_flag;
-              //  if (currentScope == "cd_create" && superior_flag== "X") {
-                if ( superior_flag== "X") { //create child
+                //  if (currentScope == "cd_create" && superior_flag== "X") {
+                if (superior_flag == "X") { //create child
+                    this.getView().byId("_IDButtonCreateRecord").setText("Create Record");
                     this.getView().byId("idpanel").setVisible(true);
                     this.getView().byId("idpanel2").setVisible(false);
                     // this.getView().byId("_IDGenButton1").setVisible(true);
@@ -28,8 +30,8 @@ sap.ui.define([
                     // this.getView().byId("_IDGenButton4").setVisible(false);
                     // this.getView().byId("_IDGenButton5").setVisible(false);
                     //this.LoadFragmentCreateChield();
-              //  } else if (currentScope == "cd_display" && superior_flag== "") {
-                } else    if ( superior_flag== "") { // display child
+                    //  } else if (currentScope == "cd_display" && superior_flag== "") {
+                } else if (superior_flag == "") { // display child
                     this.getView().byId("idpanel").setVisible(false);
                     this.getView().byId("idpanel2").setVisible(true);
                     // this.getView().byId("_IDGenButton1").setVisible(false);
@@ -40,7 +42,7 @@ sap.ui.define([
                     this.getView().byId("_IDGenObjectPageSection1DiplayChild").setVisible(true);
                     this.getCustomerAttribute();
                     //this.LoadFragmentDisplayChield();
-                } else if (currentScope == "cd_display_limited" && superior_flag== "") {
+                } else if (currentScope == "cd_display_limited" && superior_flag == "") {
                     this.getView().byId("idpanel").setVisible(false);
                     this.getView().byId("idpanel2").setVisible(true);
                     this.getView().byId("_IDGenObjectPageSection1DiplayChild").setVisible(false);
@@ -100,13 +102,13 @@ sap.ui.define([
             },
 
             //************************F4 Help for Circuit***********************************/
-            onHelpCircuit: function (oEvt) { 
+            onHelpCircuit: function (oEvt) {
                 var oSubstation = this.getView().byId("substation").getValue();
                 if (oSubstation === "") {
                     sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("text_note_mandatory"), {
                         icon: sap.m.MessageBox.Icon.WARNING,
                         title: this.getView().getModel("i18n").getProperty("error"),
-                        actions: [sap.m.MessageBox.Action.OK] 
+                        actions: [sap.m.MessageBox.Action.OK]
                     });
                     this.getView().byId("idcircuit").setValue();
                     return;
@@ -119,15 +121,15 @@ sap.ui.define([
                 // Create filters
                 var oFilterSubstation = new sap.ui.model.Filter("substation", sap.ui.model.FilterOperator.EQ, this.objSubstation.substation);
                 var oFilterDCPLIND = new sap.ui.model.Filter("dc_pl", sap.ui.model.FilterOperator.EQ, this.oDCPLIND);
-                 // Combine filters
+                // Combine filters
                 var oFiltersF = [oFilterSubstation, oFilterDCPLIND];
-                
-                    
+
+
                 var _valueHelpCircuitDialog = new sap.m.SelectDialog({
 
                     title: "Circuit", contentHeight: "50%", titleAlignment: "Center",
                     items: {
-                        path: "/d/results", 
+                        path: "/d/results",
                         template: new sap.m.StandardListItem({
                             title: "{circuit}",
                             description: "",
@@ -149,7 +151,7 @@ sap.ui.define([
                 _valueHelpCircuitDialog.setModel(oCircuitJModel);
                 //Apply Filters
                 var oCircuit = _valueHelpCircuitDialog.getBinding("items");
-                    oCircuit.filter([oFiltersF]);
+                oCircuit.filter([oFiltersF]);
                 _valueHelpCircuitDialog.open();
             },
 
@@ -300,7 +302,7 @@ sap.ui.define([
             //****************************DC/PL/IND Logic **************************************************** */
             onDCPLINDSelect: function () {
                 var oCircuit = this.getView().byId("idcircuit");
-                    oCircuit.setValue();
+                oCircuit.setValue();
                 var oSelected = this.oView.byId("idDCPLIND").getSelectedButton();
                 this.oDCPLIND = oSelected.getText();
                 if (this.oDCPLIND === "IND") {
@@ -332,10 +334,12 @@ sap.ui.define([
                 //     }
                 // });
 
-            }, 
+            },
 
             //**********************Editing Customer*****************************************/
             onEditCustomerAttribute: function () {
+                this.oEdiFlag = "X";
+                this.getView().byId("_IDButtonCreateRecord").setText("Update Record");
                 this.getView().byId("idpanel").setVisible(true);
                 this.getView().byId("idpanel2").setVisible(false);
                 // this.getView().byId("_IDGenButton1").setVisible(true);
@@ -384,7 +388,7 @@ sap.ui.define([
                 }
 
                 var oAttributs = {};
-                oAttributs.conn_obj = oCustomerAttributes1.conn_obj,
+                    oAttributs.conn_obj = oCustomerAttributes1.conn_obj,
                     oAttributs.cust_name = oCustomerAttributes1.cust_name,
                     oAttributs.mail_name = oCustomerAttributes1.mail_name,
                     oAttributs.street_no = oCustomerAttributes1.street_no,
@@ -405,7 +409,7 @@ sap.ui.define([
                     oAttributs.sect_point = oCustomerAttributes1.sect_point,
                     oAttributs.dc = oDC,
                     oAttributs.pl = oPL,
-                    oAttributs.na = oNA,
+                    oAttributs.na = oNA, 
                     oAttributs.psw = oCustomerAttributes1.psw,
                     oAttributs.prot_equip1 = oCustomerAttributes1.prot_equip1,
                     oAttributs.prot_equip2 = oCustomerAttributes1.prot_equip2,
@@ -419,56 +423,108 @@ sap.ui.define([
                     oAttributs.indus_cust = "",
                     oAttributs.pso_site = "",
                     oAttributs.demo_site = ""
-
-                                       
-                this.getOwnerComponent().getModel().create("/Customer_attributeSet", oAttributs, {
-                    //    this.oDataModel.read("Customer_searchSet", {
-                    success: function (oData, oResponse) {
-                        //that.oBusyIndicator.close()
-                        if (oData && oData.Status === "S") {
-                            var dialog = new sap.m.Dialog({
-                                title: "Success",
-                                type: 'Message',
-                                state: 'Success',
-                                content: new sap.m.Text({
-                                    text: "Submited"
-                                }),
-                                endButton: new sap.m.Button({
-                                    text: "OK",
-                                    press: function () {
-                                        dialog.close();
-                                        //location.reload();
+                    
+                if (this.oEdiFlag == "X") {
+                    this.getOwnerComponent().getModel().update("/Customer_attributeSet", oAttributs, {
+                        //    this.oDataModel.read("Customer_searchSet", {
+                        success: function (oData, oResponse) {
+                            //that.oBusyIndicator.close()
+                            if (oResponse.statusCode === "201") {
+                                var dialog = new sap.m.Dialog({
+                                    title: "Success",
+                                    type: 'Message',
+                                    state: 'Success',
+                                    content: new sap.m.Text({
+                                        text: oResponse.statusText
+                                    }),
+                                    endButton: new sap.m.Button({
+                                        text: "OK",
+                                        press: function () {
+                                            dialog.close();
+                                            //location.reload();
+                                        }
+                                    }),
+                                    afterClose: function () {
+                                        dialog.destroy();
                                     }
-                                }),
-                                afterClose: function () {
-                                    dialog.destroy();
-                                }
-                            });
-                            dialog.open();
+                                });
+                                dialog.open();
 
 
-                        } else if (oData && oData.Status === "E") {
-                            sap.m.MessageBox.show(oData.Message, {
+                            } else {
+                                sap.m.MessageBox.show(oResponse.statusText, {
+                                    icon: sap.m.MessageBox.Icon.ERROR,
+                                    title: this.getView().getModel("i18n").getProperty("error"),
+                                    actions: [sap.m.MessageBox.Action.OK]
+                                });
+                            }
+
+
+                        },
+
+                        error: function (error) {
+                            //that.oBusyIndicator.close();
+                            sap.m.MessageBox.show(
+                                error.statusText, {
                                 icon: sap.m.MessageBox.Icon.ERROR,
-                                title: this.getView().getModel("i18n").getProperty("error"),
+                                title: "Error",
                                 actions: [sap.m.MessageBox.Action.OK]
                             });
+
                         }
+                    });
+                } else {
+                    this.getOwnerComponent().getModel().create("/Customer_attributeSet", oAttributs, {
+                        //    this.oDataModel.read("Customer_searchSet", {
+                        success: function (oData, oResponse) {
+                            //that.oBusyIndicator.close()
+                            if (oResponse.statusCode === "201") {
+                                var dialog = new sap.m.Dialog({
+                                    title: "Success",
+                                    type: 'Message',
+                                    state: 'Success',
+                                    content: new sap.m.Text({
+                                        text: oResponse.statusText
+                                    }),
+                                    endButton: new sap.m.Button({
+                                        text: "OK",
+                                        press: function () {
+                                            dialog.close();
+                                            window.history.go(-1);
+                                        }
+                                    }),
+                                    afterClose: function () {
+                                        dialog.destroy();
+                                    }
+                                });
+                                dialog.open();
 
 
-                    },
+                            } else {
+                                sap.m.MessageBox.show(oResponse.statusText, {
+                                    icon: sap.m.MessageBox.Icon.ERROR,
+                                    title: this.getView().getModel("i18n").getProperty("error"),
+                                    actions: [sap.m.MessageBox.Action.OK]
+                                });
+                            }
 
-                    error: function (error) {
-                        //that.oBusyIndicator.close();
-                        sap.m.MessageBox.show(
-                            error.message, {
-                            icon: sap.m.MessageBox.Icon.ERROR,
-                            title: "Error",
-                            actions: [sap.m.MessageBox.Action.OK]
-                        });
 
-                    }
-                });
+                        },
+
+                        error: function (error) {
+                            //that.oBusyIndicator.close();
+                            sap.m.MessageBox.show(
+                                error.message, {
+                                icon: sap.m.MessageBox.Icon.ERROR,
+                                title: "Error",
+                                actions: [sap.m.MessageBox.Action.OK]
+                            });
+
+                        }
+                    });
+                }
+
+
 
                 //     this.getOwnerComponent().getModel().create("/Customer_attributeSet",CustomerAttributesList, {
                 //         success:fnSuccess,
@@ -507,6 +563,13 @@ sap.ui.define([
                 //oRouter.navTo("View1");
                 window.history.go(-1);
             },
+
+            onCreateSpecials: function (oEvent) {
+                var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                oRouter.navTo("CustomerAttributeSpecials", {
+                    scope: "cd_create"
+                });
+            }
 
         });
     });
