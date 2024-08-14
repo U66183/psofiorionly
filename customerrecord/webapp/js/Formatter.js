@@ -3,7 +3,6 @@ jQuery.sap.declare('com.pso.customerrecord.js.Formatter');
 com.pso.customerrecord.js.Formatter = {
     //Display Icon
     setIcon:function(status){
-        debugger
         if(status ==="X"){
             return "sap-icon://tree";
         }

@@ -15,6 +15,7 @@ sap.ui.define([
                 }, this);
 
                 this.oEdiFlag = "";
+
             },
             _loadFragmentPerScope: function (currentScope) {
 
@@ -24,28 +25,27 @@ sap.ui.define([
                     this.getView().byId("_IDButtonCreateRecord").setText("Create Record");
                     this.getView().byId("idpanel").setVisible(true);
                     this.getView().byId("idpanel2").setVisible(false);
-                    // this.getView().byId("_IDGenButton1").setVisible(true);
-                    // this.getView().byId("_IDGenButton2").setVisible(false);
-                    // this.getView().byId("_IDGenButton3").setVisible(false);
-                    // this.getView().byId("_IDGenButton4").setVisible(false);
-                    // this.getView().byId("_IDGenButton5").setVisible(false);
-                    //this.LoadFragmentCreateChield();
+                    this.getView().byId("_IDButtonCreateRecord").setVisible(true)
+                    this.getView().byId("_IDButtonEditRecord").setVisible(false);
+                    this.getView().byId("_IDGenButtonCreateSp").setVisible(false);
+ 
+                    //this.LoadFragmentCreateChield(); 
                     //  } else if (currentScope == "cd_display" && superior_flag== "") {
                 } else if (superior_flag == "") { // display child
                     this.getView().byId("idpanel").setVisible(false);
                     this.getView().byId("idpanel2").setVisible(true);
-                    // this.getView().byId("_IDGenButton1").setVisible(false);
-                    // this.getView().byId("_IDGenButton2").setVisible(true);
-                    // this.getView().byId("_IDGenButton3").setVisible(false);
-                    // this.getView().byId("_IDGenButton4").setVisible(false);
-                    // this.getView().byId("_IDGenButton5").setVisible(false);
-                    this.getView().byId("_IDGenObjectPageSection1DiplayChild").setVisible(true);
+                    this.getView().byId("_IDButtonEditRecord").setVisible(true);
+                    this.getView().byId("_IDButtonCreateRecord").setVisible(false);
+                    this.getView().byId("idPageSecEmerContact_DC").setVisible(true);
+                    this.getView().byId("_IDGenButtonCreateSp").setVisible(true);
+                    
                     this.getCustomerAttribute();
                     //this.LoadFragmentDisplayChield();
                 } else if (currentScope == "cd_display_limited" && superior_flag == "") {
                     this.getView().byId("idpanel").setVisible(false);
                     this.getView().byId("idpanel2").setVisible(true);
-                    this.getView().byId("_IDGenObjectPageSection1DiplayChild").setVisible(false);
+                    this.getView().byId("idPageSecEmerContact_DC").setVisible(false);
+                    this.getView().byId("_IDGenButtonCreateSp").setVisible(false);
                     //this.LoadFragmentDisplayChield();
                 }
                 //cd_display_limited
@@ -55,6 +55,17 @@ sap.ui.define([
                 // var oCreateChildFlockJModel_DD = this.getOwnerComponent().getModel("oCreateChildFlockJModel_DD")
                 // this.oDropdownData = this.getOwnerComponent().getModel("dropDownJsonModel").getProperty("/DropdownData");
                 // oCreateChildFlockJModel_DD.setProperty("/DropdownCreateChildFlock", this.oDropdownData);
+
+            },
+
+               //**********************Editing Customer*****************************************/
+               onEditCustomerAttribute: function () {
+                this.oEdiFlag = "X";
+                this.getView().byId("_IDButtonCreateRecord").setText("Update Record");
+                this.getView().byId("idpanel").setVisible(true);
+                this.getView().byId("idpanel2").setVisible(false);
+                this.getView().byId("_IDButtonCreateRecord").setVisible(true);
+                this.getView().byId("_IDButtonEditRecord").setVisible(false);
 
             },
 
@@ -96,25 +107,25 @@ sap.ui.define([
                 var oSelectedItem = oEvent.getParameter("selectedItem");
                 if (oSelectedItem) {
                     this.objSubstation = oSelectedItem.getBindingContext().getObject();
-                    this.getView().byId("substation").setValue(oSelectedItem.getTitle());
-                    this.getView().byId("idcircuit").setValue();
+                    this.getView().byId("idSubstation_CC").setValue(oSelectedItem.getTitle());
+                    this.getView().byId("idCircuit_CC").setValue();
                 }
             },
 
             //************************F4 Help for Circuit***********************************/
             onHelpCircuit: function (oEvt) {
-                var oSubstation = this.getView().byId("substation").getValue();
+                var oSubstation = this.getView().byId("idSubstation_CC").getValue();
                 if (oSubstation === "") {
                     sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("text_note_mandatory"), {
                         icon: sap.m.MessageBox.Icon.WARNING,
                         title: this.getView().getModel("i18n").getProperty("error"),
                         actions: [sap.m.MessageBox.Action.OK]
                     });
-                    this.getView().byId("idcircuit").setValue();
+                    this.getView().byId("idCircuit_CC").setValue();
                     return;
                 }
 
-                this.oDCPLIND = this.getView().byId("idDCPLIND").getSelectedButton().getText();
+                this.oDCPLIND = this.getView().byId("idDCPLIND_CC").getSelectedButton().getText();
                 var sPath = this.getOwnerComponent().getModel().sServiceUrl + "/circuit_dropdownSet";
                 var oCircuitJModel = this.getView().getModel("oCircuitJModel");
                 oCircuitJModel.loadData(sPath, null, false, "GET", false, false, null);
@@ -159,7 +170,7 @@ sap.ui.define([
                 var oSelectedItem = oEvent.getParameter("selectedItem");
                 if (oSelectedItem) {
                     this.obj = oSelectedItem.getBindingContext().getObject();
-                    this.getView().byId("idcircuit").setValue(oSelectedItem.getTitle());
+                    this.getView().byId("idCircuit_CC").setValue(oSelectedItem.getTitle());
                 }
             },
 
@@ -301,26 +312,31 @@ sap.ui.define([
             // },
             //****************************DC/PL/IND Logic **************************************************** */
             onDCPLINDSelect: function () {
-                var oCircuit = this.getView().byId("idcircuit");
+                var oCircuit = this.getView().byId("idCircuit_CC");
                 oCircuit.setValue();
-                var oSelected = this.oView.byId("idDCPLIND").getSelectedButton();
+                var oSelected = this.oView.byId("idDCPLIND_CC").getSelectedButton();
                 this.oDCPLIND = oSelected.getText();
                 if (this.oDCPLIND === "IND") {
-                    this.oView.byId("idTrans").setVisible(true);
+                    this.oView.byId("idTrans_CC").setVisible(true);
                     oCircuit.setValue();
                     oCircuit.setEnabled(false);
                 } else {
-                    this.oView.byId("idTrans").setVisible(false);
+                    this.oView.byId("idTrans_CC").setVisible(false);
                     oCircuit.setEnabled(true);
                 }
             },
             //**************************Open OPEN TEXT URL **************************************************************/
             onOpenOTurl: function () {
+                //direct url
                 var sUrl = "https://dca-dev5538.dteco.com/otcs/cs.exe?func=xecmpf.GetWspIntegration&botype=PREMISES&extsysid=DI5&bokey=5110267589&language=EN";
-                window.open(sUrl, "_blank");
-                //http://dev-https-opentext-n1:8443/otcs/cs.exe?func=xecmpf.GetWspIntegration&botype=PREMISES&extsysid=DI5
+                //           https://dca-dev5538.dteco.com/otcs/cs.exe?func=xecmpf.GetWspIntegration&botype=PREMISES&extsysid=DI5&bokey=5110267589&language=EN
+                //  var url_cc =  "&botype=PREMISES&extsysid=DI5&bokey=5110267589&language=EN;
+                //   window.open(sUrl, "_blank");
+                var url_cc = "http://dev-https-opentext-n1:8443/otcs/cs.exe?func=xecmpf.GetWspIntegration&botype=PREMISES&extsysid=DI5&bokey=5110267589&language=EN"
 
-                var url = "/compsocustomerrecord/openText/&bokey=5110267589&language=EN"
+                var url_dest = "/compsocustomerrecord/openText/&bokey=5110267589&language=EN"
+                window.open(url_cc, "_blank");
+
                 console.log(url);
 
                 // var aData = jQuery.ajax({
@@ -336,23 +352,11 @@ sap.ui.define([
 
             },
 
-            //**********************Editing Customer*****************************************/
-            onEditCustomerAttribute: function () {
-                this.oEdiFlag = "X";
-                this.getView().byId("_IDButtonCreateRecord").setText("Update Record");
-                this.getView().byId("idpanel").setVisible(true);
-                this.getView().byId("idpanel2").setVisible(false);
-                // this.getView().byId("_IDGenButton1").setVisible(true);
-                // this.getView().byId("_IDGenButton2").setVisible(false);
-                // this.getView().byId("_IDGenButton3").setVisible(false);
-                // this.getView().byId("_IDGenButton4").setVisible(false);
-                // this.getView().byId("_IDGenButton5").setVisible(false);
-            },
-
+         
             //****************Submit Customer Attrubutes****************************************/
             createCustomerDetails: function () {
-                var oStreetNo = this.getView().byId("idStreetno").getValue();
-                var oStreetAdd = this.getView().byId("idStreetAdd").getValue();
+                var oStreetNo = this.getView().byId("idStreetno_CC").getValue();
+                var oStreetAdd = this.getView().byId("idStreetAdd_CC").getValue();
                 if (oStreetNo === "" || oStreetAdd === "") {
                     sap.m.MessageBox.show(this.getView().getModel("i18n").getProperty("document_note_mandatory"), {
                         icon: sap.m.MessageBox.Icon.WARNING,
@@ -364,8 +368,8 @@ sap.ui.define([
 
                 var CustomerAttributesList = [];
                 var oCustomerAttributes1 = this.getView().getModel("oCustomerAttributesJModel").getData();
-                var oSelectedKey = this.getView().byId("idDCPLIND").getSelectedIndex();
-                var oDC, oPL, oNA = "";
+                var oSelectedKey = this.getView().byId("idDCPLIND_CC").getSelectedIndex();
+                var oDC = "", oPL = "", oNA = "";
                 if (oSelectedKey === 0) {
                     oDC = "X";
                 } else if (oSelectedKey === 1) {
@@ -374,8 +378,8 @@ sap.ui.define([
                     oNA = "X";
                 }
 
-                var oSelectedKeyGen = this.getView().byId("idGeneration").getSelectedIndex();
-                var oEmergency, oPartial, oFullGen, oNoOnsiteGen = "";
+                var oSelectedKeyGen = this.getView().byId("idGeneration_CC").getSelectedIndex();
+                var oEmergency = "", oPartial = "", oFullGen = "", oNoOnsiteGen = "";
 
                 if (oSelectedKeyGen === 0) {
                     oEmergency = "X";
@@ -386,7 +390,52 @@ sap.ui.define([
                 } else {
                     oNoOnsiteGen = "X";
                 }
+                var oNooflines = this.getView().byId("idNoOfline_CC").getSelectedKey();
+                var oServiceCentre = this.getView().byId("idSrvCenter_CC").getSelectedKey();
+                var oPrimerySrvRep = this.getView().byId("idPSR_CC").getSelectedKey();
+                var oProact1 = this.getView().byId("idProEqp1_CC").getSelectedKey();
+                var oProact2 = this.getView().byId("idProEqp2_CC").getSelectedKey();
+                var oThrowovertyp = this.getView().byId("idThrowoverTyp_CC").getSelectedKey();
+                var oServicetype = this.getView().byId("idServiceType_CC").getSelectedKey();
+                var Comments = this.getView().byId("idComents_CC").getValue();
 
+                // var oAttributs = {
+                    
+                //         "acc_rep": "",
+                //         "cable_no": "12345",
+                //         "circuit": "",
+                //         "circuit_doc_id": "543",
+                //         "city": "Southgate",
+                //         "conn_obj": "4000438944",
+                //         "cust_name": "Connection object Loc",
+                //         "doc_id": "145",
+                //         "emer_phone": "0987654321",
+                //         "emer_title": "Mr",
+                //         "generation": "genkW",
+                //         "indus_cust": "",
+                //         "mail_name": "",
+                //         "na": "",
+                //         "no_of_lines": "3",
+                //         "on_site_emerg": "X",
+                //         "on_site_nosg": "",
+                //         "on_site_part": "",
+                //         "pl": "",
+                //         "prot_equip1": "",
+                //         "prot_equip2": "",
+                //         "pso_site": "",
+                //         "psr": "",
+                //         "psw": "23",
+                //         "sect_point": "454",
+                //         "sketch_no": "2345654",
+                //         "srv_center": "",
+                //         "srv_type": "",
+                //         "street_name": "Waverly St",
+                //         "street_no": "16002",
+                //         "sub_station": "",
+                //         "throw_type": "",
+                //         "zip_code": "33351-4520"
+                        
+                // };
                 var oAttributs = {};
                     oAttributs.conn_obj = oCustomerAttributes1.conn_obj,
                     oAttributs.cust_name = oCustomerAttributes1.cust_name,
@@ -395,11 +444,11 @@ sap.ui.define([
                     oAttributs.street_name = oCustomerAttributes1.street_name,
                     oAttributs.city = oCustomerAttributes1.city,
                     oAttributs.zip_code = oCustomerAttributes1.zip_code,
-                    oAttributs.no_of_lines = oCustomerAttributes1.no_of_lines,
-                    oAttributs.srv_center = oCustomerAttributes1.srv_center,
+                    oAttributs.no_of_lines = oNooflines,
+                    oAttributs.srv_center = oServiceCentre,
                     oAttributs.cable_no = oCustomerAttributes1.cable_no,
                     oAttributs.doc_id = oCustomerAttributes1.doc_id,
-                    oAttributs.psr = oCustomerAttributes1.psr,
+                    oAttributs.psr = oPrimerySrvRep
                     oAttributs.sub_station = oCustomerAttributes1.sub_station,
                     oAttributs.sketch_no = oCustomerAttributes1.sketch_no,
                     oAttributs.circuit = oCustomerAttributes1.circuit,
@@ -409,33 +458,38 @@ sap.ui.define([
                     oAttributs.sect_point = oCustomerAttributes1.sect_point,
                     oAttributs.dc = oDC,
                     oAttributs.pl = oPL,
-                    oAttributs.na = oNA, 
+                    oAttributs.na = oNA,
                     oAttributs.psw = oCustomerAttributes1.psw,
-                    oAttributs.prot_equip1 = oCustomerAttributes1.prot_equip1,
-                    oAttributs.prot_equip2 = oCustomerAttributes1.prot_equip2,
-                    oAttributs.throw_type = oCustomerAttributes1.throw_type,
-                    oAttributs.srv_type = oCustomerAttributes1.srv_type,
+                    oAttributs.prot_equip1 = oProact1,
+                    oAttributs.prot_equip2 = oProact2,
+                    oAttributs.throw_type = oThrowovertyp,
+                    oAttributs.srv_type = oServicetype,
                     oAttributs.circuit_doc_id = oCustomerAttributes1.circuit_doc_id,
                     oAttributs.on_site_emerg = oEmergency,
                     oAttributs.on_site_part = oPartial,
-                    oAttributs.on_site_nosg = "",
+                    oAttributs.on_site_nosg = oNoOnsiteGen,
+                    oAttributs.full_generation = oFullGen,
                     oAttributs.generation = oCustomerAttributes1.generation + "kW",
                     oAttributs.indus_cust = "",
                     oAttributs.pso_site = "",
                     oAttributs.demo_site = ""
-                    
+                    oAttributs.comments = Comments;
+
                 if (this.oEdiFlag == "X") {
-                    this.getOwnerComponent().getModel().update("/Customer_attributeSet", oAttributs, {
+                    this.getOwnerComponent().getModel().update("/Customer_attributeSet('" + oAttributs.conn_obj + "')", oAttributs, {
                         //    this.oDataModel.read("Customer_searchSet", {
+                        method: "PUT",
                         success: function (oData, oResponse) {
                             //that.oBusyIndicator.close()
-                            if (oResponse.statusCode === "201") {
+                            if (oResponse.statusCode === "204") {
+                                var oMessage = JSON.parse(oResponse.headers["sap-message"]);
+
                                 var dialog = new sap.m.Dialog({
                                     title: "Success",
                                     type: 'Message',
                                     state: 'Success',
                                     content: new sap.m.Text({
-                                        text: oResponse.statusText
+                                        text: oMessage.message
                                     }),
                                     endButton: new sap.m.Button({
                                         text: "OK",
@@ -464,8 +518,10 @@ sap.ui.define([
 
                         error: function (error) {
                             //that.oBusyIndicator.close();
+                            var oError = JSON.parse(error.responseText);
+                            var oMessage = oError.error.message.value;
                             sap.m.MessageBox.show(
-                                error.statusText, {
+                                oMessage, {
                                 icon: sap.m.MessageBox.Icon.ERROR,
                                 title: "Error",
                                 actions: [sap.m.MessageBox.Action.OK]
@@ -478,13 +534,15 @@ sap.ui.define([
                         //    this.oDataModel.read("Customer_searchSet", {
                         success: function (oData, oResponse) {
                             //that.oBusyIndicator.close()
+                            var oMessage = JSON.parse(oResponse.headers["sap-message"]);
                             if (oResponse.statusCode === "201") {
+
                                 var dialog = new sap.m.Dialog({
                                     title: "Success",
                                     type: 'Message',
                                     state: 'Success',
                                     content: new sap.m.Text({
-                                        text: oResponse.statusText
+                                        text: oMessage.message
                                     }),
                                     endButton: new sap.m.Button({
                                         text: "OK",
@@ -501,7 +559,7 @@ sap.ui.define([
 
 
                             } else {
-                                sap.m.MessageBox.show(oResponse.statusText, {
+                                sap.m.MessageBox.show(oMessage.message, {
                                     icon: sap.m.MessageBox.Icon.ERROR,
                                     title: this.getView().getModel("i18n").getProperty("error"),
                                     actions: [sap.m.MessageBox.Action.OK]
@@ -513,8 +571,10 @@ sap.ui.define([
 
                         error: function (error) {
                             //that.oBusyIndicator.close();
+                            var oError = JSON.parse(error.responseText);
+                            var oMessage = oError.error.message.value
                             sap.m.MessageBox.show(
-                                error.message, {
+                                oMessage, {
                                 icon: sap.m.MessageBox.Icon.ERROR,
                                 title: "Error",
                                 actions: [sap.m.MessageBox.Action.OK]

@@ -3,13 +3,29 @@
     xmlns:l="sap.ui.layout"
     xmlns:f="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}" titleAlignment="Center" enableScrolling="true">
-    <Button id="_IDButtonTrigerWF" 
+    xmlns="sap.m" > 
+    <Page id="page" title="{i18n>title}" titleAlignment="Center" showNavButton="true" navButtonPress="onBack" enableScrolling="false">
+         
+      <Panel id="idpanelCreateSpecials" expanded="true" expandable="false" height="40em" visible="true" >
+           <content>
+            <core:Fragment 
+                    fragmentName="com.pso.customerrecord.fragment.CreateSpecials"
+                    type="XML" />
+          </content>
+      </Panel>  
+        
+       <footer>
+            <OverflowToolbar id="_IDGenOverflowToolbar01">
+                <ToolbarSpacer id="_IDGenToolbarSpacer01"/>
+                <Button id="_IDButtonTrigerWF" 
                             type="Negative" 
                             text="Trigger WF" 
                             icon="sap-icon://create"
                             press="sendSpecialsForApproval" 
                             visible="true" /> 
-  </Page>
+                            
+                            
+            </OverflowToolbar> 
+        </footer>                        
+  </Page> 
 </mvc:View>

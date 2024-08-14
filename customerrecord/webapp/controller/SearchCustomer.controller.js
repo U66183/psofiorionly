@@ -15,12 +15,12 @@ sap.ui.define([
     'sap/ui/comp/smartvariants/PersonalizableInfo',
     "sap/ui/export/Spreadsheet"
 ],
-    function (Controller,Formatter, ODataModel, JSONModel, String, ColumnListItem, Label, SearchField, Token, Filter, FilterOperator, ShellUIService, PersonalizableInfo, Spreadsheet) {
+    function (Controller, Formatter, ODataModel, JSONModel, String, ColumnListItem, Label, SearchField, Token, Filter, FilterOperator, ShellUIService, PersonalizableInfo, Spreadsheet) {
         "use strict";
- 
+
         return Controller.extend("com.pso.customerrecord.controller.SearchCustomer", {
             onInit: function () {
-                this.getUserScope();   
+                this.getUserScope();
 
 
                 // Initialize the OData model based on manifest.json configuration
@@ -28,29 +28,29 @@ sap.ui.define([
                 // var oManifest = oComponent.getManifest();
                 // var sServiceUrl = oManifest["sap.app"].dataSources.mainService.uri;
                 // this.oDataModel = new ODataModel(sServiceUrl);
-               
+
                 this.oDataModel = this.getOwnerComponent().getModel(); //make the change
 
                 //this.getView().setModel(oDataModel);
                 //this.oModel = new JSONModel();
                 //var dropDownJsonModel = new JSONModel();
                 //this.getView().setModel(dropDownJsonModel, "dropDownJsonModel");
- 
+
                 this.oView = this.getView();
                 this.onActivatingStandardFilter(); //Activating standard filters
                 this.onLetsDoBusy();
                 this.fetchDropdownData();
- 
+
                 // var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 // oRouter.getRoute("View2").attachPatternMatched(this._onRouteMatch, this);
                 //this.getDropDownValues();
- 
+
             },
             // _onRouteMatch:function(){
             //      location.reload();
             //  },
- 
-           
+
+
             //**********************Activating Standard filter******************************************************/
             onActivatingStandardFilter: function () {
                 this.applyData = this.applyData.bind(this);
@@ -70,7 +70,7 @@ sap.ui.define([
                 this.oSmartVariantManagement.addPersonalizableControl(oPersInfo);
                 this.oSmartVariantManagement.initialise(function () { }, this.oFilterBar);
             },
- 
+
             //**********************Activate Busy Indicator******************************************************/
             onLetsDoBusy: function () {
                 this.oBusyIndicator = 0;
@@ -81,14 +81,14 @@ sap.ui.define([
                     });
                 return this.oBusyIndicator;
             },
- 
- 
+
+
             //*****************************Fatching data with basic code********************************** */
             // onchange:function(){
             //  this.oSmartVariantManagement.currentVariantSetModified(true);
             //  this.oFilterBar.fireFilterChange(oEvent);
             // },
- 
+
             // fetchItems2:function(){
             //  var City = this.getView().byId("idcity").getValue();
             //  var CustName = this.getView().byId("idcustomer").getValue();
@@ -101,7 +101,7 @@ sap.ui.define([
             //     oPromiseModel.read("Customer_searchSet?$filter=cust_name eq '"+CustName+"' and city eq '"+City+"' and mail_name eq '"+MailingName+"' and street_name eq '"+streetAdd+"' and street_no eq '"+streetNo+"' and zip_code eq '"+zipcode+"'", {
             //         success: function (oData) {
             //             oSearchCustomerJModel.setData(oData.results);
- 
+
             //         },
             //         error: function (error) {
             //             sap.m.MessageBox.show(
@@ -110,23 +110,23 @@ sap.ui.define([
             //                     title: "Error",
             //                     actions: [sap.m.MessageBox.Action.OK]
             //                 });
- 
+
             //         }
             //     });
             // },
- 
+
             //**************************************Fatching DropdownData********************************/
             fetchDropdownData: function () {
                 var that = this;
                 var dropDownJsonModel = this.getOwnerComponent().getModel("dropDownJsonModel");;
                 this.oBusyIndicator.open();
                 this.getOwnerComponent().getModel().read("/DropdownSet", {
-                //this.oDataModel.read("DropdownSet", {
+                    //this.oDataModel.read("DropdownSet", {
                     success: function (oData) {
                         that.oBusyIndicator.close()
                         if (oData.results.length > 0) {
                             dropDownJsonModel.setProperty("/DropdownData", oData.results)
-                        } 
+                        }
                     },
                     error: function (error) {
                         that.oBusyIndicator.close();
@@ -140,9 +140,9 @@ sap.ui.define([
                     }
                 });
             },
- 
+
             //****************************************Fatching data************************************* */  
- 
+
             fetchItems: function () {
                 var that = this;
                 var oSearchCustomerJModel = this.oView.getModel("oSearchCustomerJModel");
@@ -161,7 +161,7 @@ sap.ui.define([
                 var sSubstation = this.oView.byId("idSubstation").getValue();
                 var sSketch_no = this.oView.byId("idSrvSketchno").getValue();
                 var sCircuit = this.oView.byId("idCircuit").getValue();
- 
+
                 var aFilters = [];
                 aFilters.push(new Filter("cust_name", FilterOperator.EQ, sCustName));
                 aFilters.push(new Filter("mail_name", FilterOperator.EQ, sMailingName));
@@ -181,31 +181,33 @@ sap.ui.define([
                 this.oBusyIndicator.open();
                 //mickey
                 this.getOwnerComponent().getModel().read("/Customer_searchSet", {
-            //    this.oDataModel.read("Customer_searchSet", {
+                    //    this.oDataModel.read("Customer_searchSet", {
                     filters: [aFilters],
                     success: function (oData) {
                         that.oBusyIndicator.close()
                         if (oData.results.length > 0) {
                             that.oView.byId("idNoofRec").setText(oData.results.length)
                             oSearchCustomerJModel.setProperty("/CustomersData", oData.results);
+                        } else {
+                            oSearchCustomerJModel.setData([]);
                         }
- 
+
                     },
                     error: function (error) {
                         that.oBusyIndicator.close();
                         sap.m.MessageBox.show(
-                            error.message, {
+                            error.statusText, {
                             icon: sap.m.MessageBox.Icon.ERROR,
                             title: "Error",
                             actions: [sap.m.MessageBox.Action.OK]
                         });
                         oSearchCustomerJModel.setData([]);
-                        that.oView.byId("idNoofRec").setText(oData.results.length);
+                        that.oView.byId("idNoofRec").setText("");
                     }
                 });
             },
- 
- 
+
+
             // fetchItems2: function () {
             //     // var City = this.getView().byId("idcity").getValue();
             //     var sCustName = this.oView.byId("idcustomer").getValue();
@@ -223,7 +225,7 @@ sap.ui.define([
             //     var sSubstation = this.oView.byId("idSubstation").getValue();
             //     var sSketch_no = this.oView.byId("idSrvSketchno").getValue();
             //     var sCircuit = this.oView.byId("idCircuit").getValue();
- 
+
             //     var sFilter = "Customer_searchSet?$filter=cust_name eq '" + sCustName + "' and mail_name eq '"
             //         + sMailingName + "' and street_name eq '" + sStreetAdd + "' and street_no eq '" + sStreetNo + "' and city eq '"
             //         + sCity + "' and zip_code eq '" + sZipcode + "' and no_of_lines eq '" + sNo_of_Lines + "' and srv_centre eq '"
@@ -232,7 +234,7 @@ sap.ui.define([
             //         + sSketch_no + "' and circuit eq '" + sCircuit + "'";
             //     utilModel.readOData("", sFilter, this.fnSuccessUpdateListmat, this, 1);
             // },
- 
+
             // fnSuccessUpdateListmat: function (oData) {
             //     var oSearchCustomerJModel = this.oView.getModel("oSearchCustomerJModel");
             //     // if (oData.results[0].Type === "E") {
@@ -243,7 +245,7 @@ sap.ui.define([
             //     //          actions: [sap.m.MessageBox.Action.OK]
             //     //      });
             //     // }
- 
+
             //     if (oData.results.length === 0) {
             //         sap.m.MessageBox.show("No data found", {
             //             icon: sap.m.MessageBox.Icon.ERROR,
@@ -257,14 +259,14 @@ sap.ui.define([
             //             this.oView.byId("idNoofRec").setText(oData.results.length)
             //             oSearchCustomerJModel.setProperty("/CustomersData", oData.results);
             //         }
- 
- 
+
+
             //     }
- 
+
             // },
- 
+
             //********************************Applying Standard Filters**************************************** */
- 
+
             //Setting selectd value in filters
             applyData: function (aData) {
                 aData.forEach(function (oDataObject) {
@@ -272,7 +274,7 @@ sap.ui.define([
                     oControl.setValue(oDataObject.fieldData);
                 }, this);
             },
- 
+
             fetchData: function () {
                 var aData = this.oFilterBar.getAllFilterItems().reduce(function (aResult, oFilterItem) {
                     aResult.push({
@@ -280,27 +282,27 @@ sap.ui.define([
                         fieldName: oFilterItem.getName(),
                         fieldData: oFilterItem.getControl().getValue()
                     });
- 
+
                     return aResult;
                 }, []);
- 
+
                 return aData;
             },
- 
+
             getFiltersWithValues: function () {
                 var aFiltersWithValue = this.oFilterBar.getFilterGroupItems().reduce(function (aResult, oFilterGroupItem) {
                     var oControl = oFilterGroupItem.getControl();
- 
+
                     if (oControl && oControl.getValue && oControl.getValue().length > 0) {
                         aResult.push(oFilterGroupItem);
                     }
- 
+
                     return aResult;
                 }, []);
- 
+
                 return aFiltersWithValue;
             },
- 
+
             //***************************************Navigating to View2 page*************************************/
             handleSelectionChange: function (oEvt) {
                 var oContext = oEvt.getSource().getBindingContext("oSearchCustomerJModel").getProperty();
@@ -309,11 +311,11 @@ sap.ui.define([
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.navTo("CustomerDetails", {
                     scope: "cd_create"
-                  });
-                  //this.currentScope
+                });
+                //this.currentScope
                 // oRouter.navTo("View2",{
                 //     Customer: oContext.cust_name
- 
+
                 // });  
             },
 
@@ -336,7 +338,7 @@ sap.ui.define([
             //         scope: "cd_display_limited"
             //       });
             // },
- 
+
             //***************************************Search within table data****************************************** */
             handleTableSearch: function (oEvet) {
                 var sValue = oEvet.getSource().getValue();
@@ -358,10 +360,10 @@ sap.ui.define([
                 var oFilterFinal = new Filter([oFilter, oFilter1, oFilter2, oFilter3, oFilter4, oFilter5, oFilter6, oFilter7,
                     oFilter8, oFilter9, oFilter10, oFilter11, oFilter12, oFilter13, oFilter14], false);
                 this.oView.byId("idCustomerListTable").getBinding("items").filter([oFilterFinal]);
-            },  
- 
+            },
+
             //******************************************Add Column Filters************************************************** */    
- 
+
             onTableColumnFilterButtonPress: function () {
                 var oModel = this.oView.getModel("oSearchCustomerJModel");
                 var oGet_dat = oModel.getProperty("/CustomersData");
@@ -385,7 +387,7 @@ sap.ui.define([
                     sap.ui.core.Fragment.byId("idColumnFiltersFrag", "idfragSubstation").setValue("");
                     sap.ui.core.Fragment.byId("idColumnFiltersFrag", "idfragSketchNo").setValue("");
                     sap.ui.core.Fragment.byId("idColumnFiltersFrag", "idfragCircuit").setValue("");
- 
+
                     this._oColumnFilterDialog.open();
                 }
             },
@@ -462,7 +464,7 @@ sap.ui.define([
                     oItems.filter(sConsData)
                 }
             },
- 
+
             //*****************************Removing Column Filters***************************************************** */
             onValidReportsColumnFilterCancel: function () {
                 var e = this.getView().byId("idCustomerListTable");
@@ -474,9 +476,9 @@ sap.ui.define([
                 var t = e.getBinding("items");
                 t.filter([])
             },
- 
+
             //************************************Add Sorting **********************************************************/  
- 
+
             onValidReportsTableSorting: function (e) {
                 this._getValidReportsTableSortDialog().open()
             },
@@ -501,7 +503,7 @@ sap.ui.define([
                 var sSorter = new sap.ui.model.Sorter(this._oValidReportsTableSortSelection.path, this._oValidReportsTableSortSelection.desc);
                 sTable.getBinding("items").sort(sSorter)
             },
- 
+
             //*****************************************Excel Download************************************** */
             onValidReportsTableExport: function () {
                 var e, t, i, l, a;
@@ -569,7 +571,7 @@ sap.ui.define([
                     width: 20,
                     wrap: true
                 });
- 
+
                 t.push({
                     label: e.getText("FNumberoflines"),
                     type: sap.ui.export.EdmType.String,
@@ -633,7 +635,7 @@ sap.ui.define([
                     width: 20,
                     wrap: true
                 });
- 
+
                 return t
             },
             //*************************Get value of resorce model ********************************************/
@@ -642,36 +644,36 @@ sap.ui.define([
             },
 
             //
-            getUserScope: async function(){
-                            var sUserName,
-                                sScopes = null;
-                            await fetch("/getUserInfo")
-                            .then(res => res.json())
-                            .then(data => {
-                                 sUserName = data.decodedJWTToken.email;
-                                 sScopes = data.decodedJWTToken.scope;
-                            });
-                            console.log(sUserName);
-                            console.log(sScopes);
-                
-                            var currentScope;
-                            for(var i=0; i<sScopes.length; i++){
-                                if(sScopes[i].includes('pso_customer_details_create')){
-                                    console.log("scope = pso_customer_details_create");
-                                    currentScope = "cd_create"
-                                }
-                                else if(sScopes[i].includes('pso_customer_details_display')){
-                                    console.log("scope = pso_customer_details_display");
-                                    currentScope = "cd_display"
-                                }
-                            }
-                            this.currentScope = currentScope;
-                         //   return sScopes;
-                
-                        }
- 
- 
- 
- 
+            getUserScope: async function () {
+                var sUserName,
+                    sScopes = null;
+                await fetch("/getUserInfo")
+                    .then(res => res.json())
+                    .then(data => {
+                        sUserName = data.decodedJWTToken.email;
+                        sScopes = data.decodedJWTToken.scope;
+                    });
+                console.log(sUserName);
+                console.log(sScopes);
+
+                var currentScope;
+                for (var i = 0; i < sScopes.length; i++) {
+                    if (sScopes[i].includes('pso_customer_details_create')) {
+                        console.log("scope = pso_customer_details_create");
+                        currentScope = "cd_create"
+                    }
+                    else if (sScopes[i].includes('pso_customer_details_display')) {
+                        console.log("scope = pso_customer_details_display");
+                        currentScope = "cd_display"
+                    }
+                }
+                this.currentScope = currentScope;
+                //   return sScopes;
+
+            }
+
+
+
+
         });
     });

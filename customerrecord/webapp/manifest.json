@@ -104,7 +104,7 @@
           "name": "CustomerDetails",
           "pattern": "CustomerDetails/{scope}",
           "target": [
-            "TargetCustomerDetails"
+            "TargetCustomerDetails" 
           ]
         },
         {

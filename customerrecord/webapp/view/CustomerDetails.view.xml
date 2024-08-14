@@ -8,133 +8,79 @@
     xmlns:form="sap.ui.layout.form"
     xmlns:smartForm="sap.ui.comp.smartform"
     xmlns:smartField="sap.ui.comp.smartfield"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}" titleAlignment="Center" enableScrolling="false">
-        <!-- <form:SimpleForm id="form1">
-            <Bar id="bar1">
-                <contentLeft> -->
-                    <!-- <Button
-                        id="bt1"                        
-                        press="onBack"
-                        type="Back"
-                    /> -->
-                <!-- </contentLeft>
-                <contentRight> -->
-                    <!-- odata POST call to be triggered -->
-                    <!-- <Button
-                        id="_IDGenButton1"
-                        type="Emphasized"
-                        text="Save"
-                        icon="sap-icon://save"
-                        press="saveCustomerAttribute"
-                        visible="false"
-                    /> -->
-                    <!--create, edit -->
-                    <!-- load edit fragment on click of Edit button from Display fragment -->
-                    <!-- <Button
-                        id="_IDGenButton2"
-                        type="Emphasized"
-                        text="Edit"
-                        icon="sap-icon://edit"
-                        press="onEditCustomerAttribute"
-                        visible="false"
-                    /> -->
-                    <!--display -->
-
-                    <!-- record is child floc, PSR is not yet created, user has sufficient access -->
-                    <!-- <Button
-                        id="_IDGenButton3"
-                        type="Emphasized"
-                        text="Create PSR"
-                        icon="sap-icon://create" 
-                        visible="false"
-                    /> -->
-                    <!-- record is child floc, PSR exists, user has sufficient access , then last approved record is fetched from ISU-->
-                    <!-- <Button
-                        id="_IDGenButton4"
-                        type="Emphasized"
-                        text="Display PSR"
-                        icon="sap-icon://display"
-                        press="displayPSR"
-                        visible="false"
-                    />
-                    <Button
-                        id="_IDGenButton5"
-                        type="Emphasized"
-                        text="Edit PSR"
-                        icon="sap-icon://edit"
-                        visible="false"
-                    /> -->
-                <!-- </contentRight>
-            </Bar>
-        </form:SimpleForm> -->
-
+    xmlns="sap.m"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+        titleAlignment="Center"
+        showNavButton="true"
+        navButtonPress="onBack"
+        enableScrolling="false"
+    >
         <content>
-            <Panel id="idpanel" expanded="true" expandable="false" height="600px" visible='true'>
-                <headerToolbar>
-                    <OverflowToolbar id="_IDGenOverflowToolbar1" style="Clear">
-                    <!-- <Title text="Custom Toolbar with a header text" /> -->
-                    <Button id="btback1" 
-                            press="onBack" 
-                            type="Back"/>
-
-                    <ToolbarSpacer id="_IDGenToolbarSpacer1" /> 
-
-                    <Button id="_IDButtonCreateRecord" 
-                            type="Negative" 
-                            text="Create Record" 
-                            icon="sap-icon://create"
-                            press="createCustomerDetails" visible="true" /> 
-                 </OverflowToolbar>
-                </headerToolbar>
-                <core:Fragment fragmentName="com.pso.customerrecord.fragment.CreateChildFloc" type="XML"/>
+            <Panel
+                id="idpanel"
+                expanded="true"
+                expandable="false"
+                height="600px"
+                visible='true'
+            >
+                <core:Fragment
+                    fragmentName="com.pso.customerrecord.fragment.CreateChildFloc"
+                    type="XML"
+                />
             </Panel>
 
-
-
-            <Panel id="idpanel2" expanded="true" expandable="false" height="600px" visible="false" >
-                <headerToolbar>
-                    <OverflowToolbar id="_IDGenOverflowToolbar2" style="Clear">
-                        <!-- <Title text="Custom Toolbar with a header text" /> -->
-                        <Button id="btback2" press="onBack" type="Back" />
-                        <ToolbarSpacer id="_IDGenToolbarSpacer2" />
-                         
-                        <Button
-                            id="_IDGenButton2"
-                            type="Neutral"
-                            text="Edit Record"
-                            icon="sap-icon://edit"
-                            press="onEditCustomerAttribute"
-                            visible="true"/>
-                        <Button
-                            id="_IDGenButtonCreateSp"
-                            type="Negative"
-                            text="Create Specials"
-                            icon="sap-icon://create"
-                            press="onCreateSpecials"
-                            visible="true"
-                        />
-                        <Button
-                            id="_IDGenButtonDisplaySp"
-                            type="Accept"
-                            text="Display Specials"
-                            icon="sap-icon://display"
-                            visible="false"/>
-                    </OverflowToolbar>
-                </headerToolbar>
+            <Panel
+                id="idpanel2"
+                expanded="true"
+                expandable="false"
+                height="600px"
+                visible="false"
+            >
                 <core:Fragment
                     fragmentName="com.pso.customerrecord.fragment.DisplayChildFloc"
-                    type="XML" />
+                    type="XML"
+                />
             </Panel>
         </content>
         <footer>
-            <!-- <OverflowToolbar id="_IDGenOverflowToolbar1">
-                <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
-                <Button id="_IDGenButton454" text="Save" type="Emphasized" press="onCreate" />
-                <Button id="_IDGenButto11" text="Create PSR" type="Emphasized" press="onCreate" />
-                <Button id="_IDGenButton112" text="Extend PSR" type="Emphasized" press="onCreate" />
-                <Button id="_IDGenButtn112" text="Display PSR" type="Emphasized" press="onCreate" />
-            </OverflowToolbar> -->
+            <OverflowToolbar id="_IDGenOverflowToolbar01">
+                <ToolbarSpacer id="_IDGenToolbarSpacer01" />
+                <Button
+                    id="_IDButtonCreateRecord"
+                    type="Negative"
+                    text="Create Record"
+                    icon="sap-icon://create"
+                    press="createCustomerDetails"
+                    visible="false"
+                />
+
+                <Button
+                    id="_IDButtonEditRecord"
+                    type="Neutral"
+                    text="Edit Record"
+                    icon="sap-icon://edit"
+                    press="onEditCustomerAttribute"
+                    visible="false"
+                />
+                <Button
+                    id="_IDGenButtonCreateSp"
+                    type="Negative"
+                    text="Create Specials"
+                    icon="sap-icon://create"
+                    press="onCreateSpecials"
+                    visible="false"
+                />
+                <Button
+                    id="_IDGenButtonDisplaySp"
+                    type="Accept"
+                    text="Display Specials"
+                    icon="sap-icon://display"
+                    visible="false"
+                />
+            </OverflowToolbar>
         </footer>
     </Page>
 </mvc:View>

@@ -10,9 +10,9 @@
       "csrfProtection": false
     },
     {
-      "source": "^/Dev-Opentext/(.*)$",
+      "source": "^/openText/(.*)$",
       "target": "/$1",
-      "destination": "openText",
+      "destination": "Dev-Opentext",
       "authenticationType": "none",
       "csrfProtection": false
     },
