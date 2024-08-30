@@ -28,6 +28,7 @@ sap.ui.define([
                     this.getView().byId("_IDButtonCreateRecord").setVisible(true)
                     this.getView().byId("_IDButtonEditRecord").setVisible(false);
                     this.getView().byId("_IDGenButtonCreateSp").setVisible(false);
+                    this.getView().byId("idButtonView").setVisible(false)
  
                     //this.LoadFragmentCreateChield(); 
                     //  } else if (currentScope == "cd_display" && superior_flag== "") {
@@ -38,6 +39,7 @@ sap.ui.define([
                     this.getView().byId("_IDButtonCreateRecord").setVisible(false);
                     this.getView().byId("idPageSecEmerContact_DC").setVisible(true);
                     this.getView().byId("_IDGenButtonCreateSp").setVisible(true);
+                    this.getView().byId("idButtonView").setVisible(false)
                     
                     this.getCustomerAttribute();
                     //this.LoadFragmentDisplayChield();
@@ -66,7 +68,16 @@ sap.ui.define([
                 this.getView().byId("idpanel2").setVisible(false);
                 this.getView().byId("_IDButtonCreateRecord").setVisible(true);
                 this.getView().byId("_IDButtonEditRecord").setVisible(false);
+                this.getView().byId("idButtonView").setVisible(true)
 
+            },
+
+            onViewRecord:function(){
+                this.getView().byId("idpanel").setVisible(false);
+                this.getView().byId("idpanel2").setVisible(true);
+                this.getView().byId("_IDButtonCreateRecord").setVisible(false);
+                this.getView().byId("_IDButtonEditRecord").setVisible(true);
+                this.getView().byId("idButtonView").setVisible(false)
             },
 
             //*******************************F4 Help for Substation**********************/
@@ -335,9 +346,14 @@ sap.ui.define([
                 var url_cc = "http://dev-https-opentext-n1:8443/otcs/cs.exe?func=xecmpf.GetWspIntegration&botype=PREMISES&extsysid=DI5&bokey=5110267589&language=EN"
 
                 var url_dest = "/compsocustomerrecord/openText/&bokey=5110267589&language=EN"
-                window.open(url_cc, "_blank");
+                
+                //New OT Url
+                var new_Url = "https://dca-dev5538.dteco.com/otcs/cs.exe?func=xecmpf.GetWspIntegration&botype=BUS0010&extsysid=DI5&bokey=0431034121&language=EN"
+                
 
-                console.log(url);
+                window.open(new_Url, "_blank");
+
+                //console.log(url);
 
                 // var aData = jQuery.ajax({
                 //     type: "GET",
@@ -439,7 +455,7 @@ sap.ui.define([
                 var oAttributs = {};
                     oAttributs.conn_obj = oCustomerAttributes1.conn_obj,
                     oAttributs.cust_name = oCustomerAttributes1.cust_name,
-                    oAttributs.mail_name = oCustomerAttributes1.mail_name,
+                    //Attributs.mail_name = oCustomerAttributes1.mail_name,
                     oAttributs.street_no = oCustomerAttributes1.street_no,
                     oAttributs.street_name = oCustomerAttributes1.street_name,
                     oAttributs.city = oCustomerAttributes1.city,
@@ -452,7 +468,7 @@ sap.ui.define([
                     oAttributs.sub_station = oCustomerAttributes1.sub_station,
                     oAttributs.sketch_no = oCustomerAttributes1.sketch_no,
                     oAttributs.circuit = oCustomerAttributes1.circuit,
-                    oAttributs.acc_rep = oCustomerAttributes1.acc_rep,
+                    //oAttributs.acc_rep = oCustomerAttributes1.acc_rep,
                     oAttributs.emer_title = oCustomerAttributes1.emer_title,
                     oAttributs.emer_phone = oCustomerAttributes1.emer_phone,
                     oAttributs.sect_point = oCustomerAttributes1.sect_point,
@@ -628,6 +644,25 @@ sap.ui.define([
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.navTo("CustomerAttributeSpecials", {
                     scope: "cd_create"
+                });
+            },
+            oncallc4cOData:function(){
+                var oSearchCustomerJModel = this.oView.getModel("oSearchCustomerJModel");
+                var oPromiseModel = new sap.ui.model.odata.v2.ODataModel("/sap/c4c/odata/v1/c4codataapi");
+                oPromiseModel.read("BusinessUserCollection?$filter=UserID eq 'U62926'", {
+                    success: function (oData) {
+                        oSearchCustomerJModel.setData(oData.results);
+
+                    },
+                    error: function (error) {
+                        sap.m.MessageBox.show(
+                            error.message, {
+                                icon: sap.m.MessageBox.Icon.ERROR,
+                                title: "Error",
+                                actions: [sap.m.MessageBox.Action.OK]
+                            });
+
+                    }
                 });
             }
 

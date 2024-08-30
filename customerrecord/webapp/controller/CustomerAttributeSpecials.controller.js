@@ -15,7 +15,17 @@ sap.ui.define([
             },
             _loadFragmentPerScope: function(currentScope){
                 var oScope = currentScope;
+                //this.onCreateFusesAtLedRows();
             },
+
+            onDisplaySpecials:function(){
+                this.getView().byId("idpanelCreateSpecials").setVisible(false);
+                this.getView().byId("idpanelDisplaySpecials").setVisible(true);
+            },
+
+            // onCreateFusesAtLedRows:function(){
+
+            // },
         onBack :function(){
             window.history.go(-1); 
         }  

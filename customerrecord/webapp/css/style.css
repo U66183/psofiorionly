@@ -19,3 +19,7 @@
     border-top: 1px solid #eff1f2 !important;
 }
 
+.boldLabel {
+    font-weight: bold;
+}
+

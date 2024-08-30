@@ -4,19 +4,21 @@
     <ViewSettingsDialog id="_IDGenViewSettingsDialog1" confirm="onValidReportsColumnFilterConfirm" cancel="onValidReportsColumnFilterCancel" resetFilters="onValidReportsResetColumnFilters">
         <customTabs>
             <ViewSettingsCustomTab id="idValidReportsColumnFilters" icon="sap-icon://filter" title="{i18n>columnFilters}" tooltip="{i18n>columnFilters}">
-                <content>
+                <content> 
                     <Panel id="_IDGenPanel1">
-                        <Label id="_IDGenLabel1" text="{i18n>FragCustName}" design="Bold"/>
+                        <Label id="_IDGenLabel1" text="{i18n>Fcutname}" design="Bold"/>
                         <Input id="idfragCustName" value=""/>
-                        <Label id="_IDGenLabel2" text="{i18n>FragMailingName}" design="Bold"/>
+                        <Label id="_IDGenLabel2" text="{i18n>FMailingname}" design="Bold"/>
                         <Input id="idfragMailingName" value=""/>
-                        <Label id="_IDGenLabel3" text="{i18n>FragStreetAdd}" design="Bold"/>
+                        <Label id="_IDGenLabelBentity" text="{i18n>FBillingEntity}" design="Bold"/>
+                        <Input id="idfragBillingentity" value=""/>
+                        <Label id="_IDGenLabel3" text="{i18n>FStreetAdd}" design="Bold"/>
                         <Input id="idfragStreetAdd" value=""/>
-                        <Label id="_IDGenLabel4" text="{i18n>FragStreetNo}" design="Bold"/>
+                        <Label id="_IDGenLabel4" text="{i18n>FStreetNo}" design="Bold"/>
                         <Input id="idfragStreetNo" value=""/>
-                        <Label id="_IDGenLabel5" text="{i18n>FragCity}" design="Bold"/>
+                        <Label id="_IDGenLabel5" text="{i18n>Fcity}" design="Bold"/>
                         <Input id="idFragCity" value=""/>
-                        <Label id="_IDGenLabel6" text="{i18n>fragZipCode}" design="Bold"/>
+                        <Label id="_IDGenLabel6" text="{i18n>FZipcod}" design="Bold"/>
                         <Input id="idfragZipcode" value=""/>
                         <Label id="_IDGenLabel7" text="{i18n>FNumberoflines}" design="Bold"/>
                         <Input id="idfragNoofLines" value=""/>

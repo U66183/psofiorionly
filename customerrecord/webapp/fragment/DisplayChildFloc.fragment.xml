@@ -18,7 +18,7 @@
  
     <x:sections>
 
-    <x:ObjectPageSection id="idPageSectionCustomerInfo_DC" titleUppercase="false" title="Customer Information" visible="true">
+    <x:ObjectPageSection id="idPageSectionCustomerInfo_DC" titleUppercase="false" title="{i18n>customer_info}" visible="true">
         <x:subSections>
           <x:ObjectPageSubSection id="idCustomerSubSection_DC" titleUppercase="false">
             <x:blocks>
@@ -60,7 +60,7 @@
         </x:subSections>
       </x:ObjectPageSection>
 
-      <x:ObjectPageSection id="idPageSecEmerContact_DC" titleUppercase="false" title="Emergency Contact" visible="true">
+      <x:ObjectPageSection id="idPageSecEmerContact_DC" titleUppercase="false" title="{i18n>emergency_contact}" visible="true">
         <x:subSections>
           <x:ObjectPageSubSection id="idSubSecEmerContact_DC" titleUppercase="false">
             <x:blocks>
@@ -95,7 +95,7 @@
 
       
 
-      <x:ObjectPageSection id="idObjectPageSecH2_DC" titleUppercase="false" title="Heading 2">
+      <x:ObjectPageSection id="idObjectPageSecH2_DC" titleUppercase="false" title="{i18n>other_cust_details}">
         <x:subSections>
           <x:ObjectPageSubSection id="idSubPageSecH2_DC" titleUppercase="false">
             <x:blocks>
@@ -142,13 +142,13 @@
 
 
 
-      <x:ObjectPageSection id="idObjectPageSecCirInfo_DC" titleUppercase="false" title="Circuit Information">
+      <x:ObjectPageSection id="idObjectPageSecCirInfo_DC" titleUppercase="false" title="{i18n>Circuit_Information}">
         <x:subSections>
           <x:ObjectPageSubSection id="idSubSecCirInfo_DC" titleUppercase="false">
             <x:blocks>
-              <form:SimpleForm id="idReqFormCirInfo_DC" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
+              <form:SimpleForm id="idReqFormCirInfo_DC" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="2" columnsL="2" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
                 <form:content>
-
+                  <core:Title id="_IDGenTitle1" text=""/>
                   <Label id="idlblDCPLIND_DC"/>
                   <RadioButtonGroup id="idDCPLIND_DC" columns="5" class="sapUiMediumMarginBottom" select="onDCPLINDSelect" selectedIndex="" enabled="false">
                     <RadioButton id="DC_DC" text="DC" selected="{= ${oCustomerAttributesJModel>/dc} === 'X' ? true : false}"/>
@@ -201,16 +201,26 @@
                     </layoutData>
                     
                   </Text>
+                  <core:Title id="_IDGenTitle12" text=""/>
+                  <Label id="idlblDCPLIND_DC2"/>
+                  <RadioButtonGroup id="idDCPLIND_DC2" columns="5" class="sapUiMediumMarginBottom" select="onDCPLINDSelect" selectedIndex="" enabled="false">
+                    <RadioButton id="DC_DC2" text="DC" selected="{= ${oCustomerAttributesJModel>/dc} === 'X' ? true : false}"/>
+                    <RadioButton id="PL_DC2" text="PL" selected="{= ${oCustomerAttributesJModel>/pl} === 'X' ? true : false}"/>
+                    <RadioButton id="IND_DC2" text="IND" selected="{= ${oCustomerAttributesJModel>/na} === 'X' ? true : false}"/>
+                  </RadioButtonGroup>
+                  <Label id="idlblTrans_DC2" text="{i18n>trans}" />
+                  <Text id="idTrans_DC2" text="{oCustomerAttributesJModel>/trans}" visible="false"/>
 
                 </form:content>
               </form:SimpleForm >
             </x:blocks>
+            
           </x:ObjectPageSubSection>
         </x:subSections>
       </x:ObjectPageSection>
 
 
-      <x:ObjectPageSection id="idObjectPageSecH4_DC" titleUppercase="false" title="Heading 4">
+      <x:ObjectPageSection id="idObjectPageSecH4_DC" titleUppercase="false" title="{i18n>Equipment_and_Gene}">
         <x:subSections>
           <x:ObjectPageSubSection id="idSubSecH4_DC" titleUppercase="false">
             <x:blocks>
@@ -283,17 +293,18 @@
       </x:ObjectPageSection>
 
 
-      <x:ObjectPageSection id="idObjPageSecComments_DC" titleUppercase="false" title="Comments">
+      <x:ObjectPageSection id="idObjPageSecComments_DC" titleUppercase="false" title="{i18n>Comments}">
         <x:subSections>
           <x:ObjectPageSubSection id="idSubSecComments_DC" titleUppercase="false">
             <x:blocks>
+            
               <form:SimpleForm id="idReqFormComments_DC" editable="true" layout="ResponsiveGridLayout" singleContainerFullSize="false" columnsXL="1" columnsL="1" labelSpanXL="3" labelSpanL="4" labelSpanM="12" labelSpanS="12">
                 <form:content>
                   <Label id="idlblComments_DC" text="Comments"/>
                   <TextArea id="idComents_DC" value="{oCustomerAttributesJModel>/comments}" growing="true" showExceededText="true" valueLiveUpdate="true" editable="false"  rows="6"/>
 
                 </form:content>
-              </form:SimpleForm >
+              </form:SimpleForm > 
             </x:blocks>
           </x:ObjectPageSubSection>
         </x:subSections>

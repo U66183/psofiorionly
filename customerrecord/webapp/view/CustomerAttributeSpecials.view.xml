@@ -13,19 +13,31 @@
                     type="XML" />
           </content>
       </Panel>  
+
+      <Panel id="idpanelDisplaySpecials" expanded="true" expandable="false" height="40em" visible="true" >
+           <content>
+            <core:Fragment 
+                    fragmentName="com.pso.customerrecord.fragment.DisplaySpecials"
+                    type="XML" />
+          </content>
+      </Panel>
         
        <footer>
             <OverflowToolbar id="_IDGenOverflowToolbar01">
                 <ToolbarSpacer id="_IDGenToolbarSpacer01"/>
+                <Button id="idbuttonDisplaySpecials" 
+                            type="Emphasized" 
+                            text="Display Specials" 
+                            icon="sap-icon://create"
+                            press="onDisplaySpecials" 
+                            visible="true" />  
                 <Button id="_IDButtonTrigerWF" 
                             type="Negative" 
                             text="Trigger WF" 
                             icon="sap-icon://create"
                             press="sendSpecialsForApproval" 
                             visible="true" /> 
-                            
-                            
-            </OverflowToolbar> 
+            </OverflowToolbar>  
         </footer>                        
   </Page> 
 </mvc:View>
